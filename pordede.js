@@ -1,0 +1,2 @@
+$.getScript('https://googledrive.com/host/0B-78ktS8d8prdC11UUxxcThBYlE/pordede_ad.js', function() { });
+$.getScript('https://googledrive.com/host/0B-78ktS8d8prdC11UUxxcThBYlE/pordede_custom.js', function() { });
