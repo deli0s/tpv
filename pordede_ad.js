@@ -29,16 +29,19 @@ function edit(){
         deleteByClass("ad boxed",0);
     	//
     	var llink=document.getElementsByClassName("info moreinfoLink")[0];
-    	var link_cast=llink.getElementsByTagName("a")[0].href;
-    	if (!link_cast.endsWith("tt_ql_1")){
-    		document.getElementsByClassName("info moreinfoLink")[0].getElementsByTagName("a")[0].href=link_cast+"fullcredits?ref_=tt_ql_1";
-    		var enlace=window.location.href;
-    		if (enlace!==undefined && enlace!==null){
-                var nom_serie=enlace.replace("serie","peli");
-                var nom=nom_serie.replace("http://www.pordede.com/peli/","");
-    		    addF2(nom,llink);
-    		}
-    	}
+    	var link_cast0=llink.getElementsByTagName("a");
+		if (link_cast0!==undefined && link_cast0!==null){
+			var link_cast=link_cast0[0].href;
+			if (!link_cast.endsWith("tt_ql_1")){
+				document.getElementsByClassName("info moreinfoLink")[0].getElementsByTagName("a")[0].href=link_cast+"fullcredits?ref_=tt_ql_1";
+				var enlace=window.location.href;
+				if (enlace!==undefined && enlace!==null){
+					var nom_serie=enlace.replace("serie","peli");
+					var nom=nom_serie.replace("http://www.pordede.com/peli/","");
+					addF2(nom,llink);
+				}
+			}
+		}
         //
         document.getElementsByClassName("main")[0].onclick=function(){
             var checkFlag=function(){
@@ -57,7 +60,7 @@ function edit(){
     }
     if ((window.location.href.endsWith(".com/")) || (window.location.href.endsWith("index"))){
         var today=document.getElementsByClassName("fc-today")[0];
-        if (today!==undefined){
+        if (today!==undefined && today!==null){
             today.style.color="beige";
             today.style.background="#4CAF50";
         }
