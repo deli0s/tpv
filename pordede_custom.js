@@ -196,8 +196,8 @@ function creaFolder(f,ttl,sub,f_txt){
     if (document.getElementsByClassName(f).length<=0){
     	var folder=document.createElement("div");
         folder.className=f;
-    	folder.style.border="1px solid #666";
-    	folder.style.backgroundColor="#ccc";
+    	folder.style.border="1px solid #ccc";
+    	folder.style.backgroundColor="#eee";
     	folder.style.marginTop="5px";
     	var folder_title=document.createElement("div");
         folder_title.id=ttl;
@@ -212,7 +212,7 @@ function creaFolder(f,ttl,sub,f_txt){
         var subFolder=document.createElement("div");
         subFolder.id=sub;
         subFolder.style.display="none";
-    	subFolder.style.borderTop="1px dotted rgb(102, 102, 102)";
+    	subFolder.style.borderTop="1px dotted #ccc";
     	subFolder.style.paddingTop="10px";
     	subFolder.style.paddingBottom="10px";
     	subFolder.style.paddingRight="10px";
