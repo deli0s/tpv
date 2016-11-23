@@ -34,9 +34,7 @@ function edit2(){
     //
     if ((window.location.href.endsWith("pelis")) || (window.location.href.endsWith("pelis/")) || (window.location.href.endsWith("series/")) || (window.location.href.indexOf("pelis/index") > -1) || (window.location.href.endsWith("series")) || (window.location.href.indexOf("series/index") > -1)){
         borra();
-        window.setTimeout(borra,1000);
-        window.setTimeout(borra,2500);
-        document.getElementById("stickyfooterWrapper").onclick=function(){borra();window.setTimeout(borra,1000);window.setTimeout(borra,2500);};
+        document.getElementById("stickyfooterWrapper").onclick=borra;
     }
     //
     if ((window.location.href.endsWith(".com/")) || (window.location.href.endsWith("index"))){
@@ -45,17 +43,15 @@ function edit2(){
 		var size_ep=episodes_lk.length;
 		for (var i_ep=0; i_ep<size_ep; i_ep++){
 			var child_ep=episodes_lk[i_ep];
-			var ep_text=child_ep.innerHTML;
-			var ep_season=ep_text.substring(0,ep_text.indexOf("x"));
-			var ep_ep=Number(ep_text.replace(ep_season+"x",""));
 			
-			var ep_iframe = document.createElement("iframe");
-			ep_iframe.id = "ep_iframe";
-			ep_iframe.src = "http://www.pordede.com/serie/american-dad";
-			//ep_iframe.style.display = "none";
-			document.getElementById("sections-list").appendChild(ep_iframe);
-			
-			doc = getFrameDocument(ep_iframe);
+			var src_lk="http://www.pordede.com/serie/the-walking-dead";
+			$.get(src_lk,{child_ep}, function(data,ep_ep){
+				//start html link
+				var ep_text=child_ep.innerHTML;
+				var ep_season=ep_text.substring(0,ep_text.indexOf("x"));
+				var ep_ep=Number(ep_text.replace(ep_season+"x",""));
+				//end html link
+			});
 			//doc.getElementById("episodes-"+ep_season+"-"+document.getElementById("layout4").getAttribute("data-id")).getElementsByClassName("modelContainer defaultPopup")[ep_ep-1];
 		}
 		//
@@ -89,15 +85,7 @@ function edit2(){
     //
     getLinks();
     deleteLinks();
-    window.setTimeout(deleteLinks,100);
-    window.setTimeout(deleteLinks,1000);
-    window.setTimeout(deleteLinks,3500);
-    window.setTimeout(deleteLinks,5000);
 }//end edit2
-
-function getFrameDocument(iframe){
-    return iframe.contentDocument ? iframe.contentDocument : iframe.contentWindow.document;
-}
 
 function borra(){//ja estan pendents o vistes
     var all=document.getElementsByClassName("ddItemContainer modelContainer");
@@ -353,6 +341,13 @@ function deleteByClass(nom,num){
 }
 //--enllaç extern--//<i class="icon-external-link" style=" margin-left: 9px;" target="_blank" href="/links/viewepisode/id/236918"></i>
 edit2();
-function reload(){edit();window.setTimeout(edit,1000);window.setTimeout(edit,2500);edit2();window.setTimeout(edit2,1000);window.setTimeout(edit2,2500);}
+function reload(){
+	try {
+        edit();
+		edit2();
+    }catch(err) {
+        // error
+    }
+}
 document.getElementById("bodyId").onclick=reload;
 document.getElementById("bodyId").addEventListener("wheel",reload);
