@@ -40,6 +40,25 @@ function edit2(){
     }
     //
     if ((window.location.href.endsWith(".com/")) || (window.location.href.endsWith("index"))){
+		//change direct links
+		var episodes_lk=document.getElementsByClassName("userepiinfo defaultLink");
+		var size_ep=episodes_lk.length;
+		for (var i_ep=0; i_ep<size_ep; i_ep++){
+			var child_ep=episodes_lk[i_ep];
+			var ep_text=child_ep.innerHTML;
+			var ep_season=ep_text.substring(0,ep_text.indexOf("x"));
+			var ep_ep=Number(ep_text.replace(ep_season+"x",""));
+			
+			var ep_iframe = document.createElement("iframe");
+			ep_iframe.id = "ep_iframe";
+			ep_iframe.src = "http://www.pordede.com/serie/american-dad";
+			ep_iframe.style.display = "none";
+			document.getElementById("sections-list").appendChild(ep_iframe);
+			
+			doc = getFrameDocument(ep_iframe);
+			doc.getElementById("episodes-"+ep_season+"-"+document.getElementById("layout4").getAttribute("data-id")).getElementsByClassName("modelContainer defaultPopup")[ep_ep-1];
+		}
+		//
         deleteByClass("configMenu",0);
     	deleteByClass("actionsContainer",0);
         var child_title=document.getElementsByClassName("inline-subtitle");
@@ -75,6 +94,11 @@ function edit2(){
     window.setTimeout(deleteLinks,3500);
     window.setTimeout(deleteLinks,5000);
 }//end edit2
+
+function getFrameDocument(iframe){
+    return iframe.contentDocument ? iframe.contentDocument : iframe.contentWindow.document;
+}
+
 function borra(){//ja estan pendents o vistes
     var all=document.getElementsByClassName("ddItemContainer modelContainer");
     var size=all.length;var i=size-1;
