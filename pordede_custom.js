@@ -52,11 +52,10 @@ function edit2(){
 			var ep_iframe = document.createElement("iframe");
 			ep_iframe.id = "ep_iframe";
 			ep_iframe.src = "http://www.pordede.com/serie/american-dad";
-			ep_iframe.style.display = "none";
+			//ep_iframe.style.display = "none";
 			document.getElementById("sections-list").appendChild(ep_iframe);
 			
 			doc = getFrameDocument(ep_iframe);
-			alert(doc.innerHTML);
 			//doc.getElementById("episodes-"+ep_season+"-"+document.getElementById("layout4").getAttribute("data-id")).getElementsByClassName("modelContainer defaultPopup")[ep_ep-1];
 		}
 		//
