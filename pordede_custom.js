@@ -146,7 +146,7 @@ function addIMDB(enlace,child_peli){
 function addLinks(nom,child_peli){
 	var a_link=document.createElement("a");
 	var a_i_link=document.createElement("i");
-	a_i_link.className"icon-external-link";
+	a_i_link.className="icon-external-link";
 	a_link.appendChild(a_i_link);
 	a_link.appendChild(linkText);
 	a_link.setAttribute('href','/links/view/slug/'+nom+'/what/peli');
