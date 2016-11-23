@@ -148,7 +148,6 @@ function addLinks(nom,child_peli){
 	var a_i_link=document.createElement("i");
 	a_i_link.className="icon-external-link";
 	a_link.appendChild(a_i_link);
-	a_link.appendChild(linkText);
 	a_link.setAttribute('href','/links/view/slug/'+nom+'/what/peli');
 	a_link.setAttribute('class','linky-winky');
 	a_link.setAttribute('target','_blank');
