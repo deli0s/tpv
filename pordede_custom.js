@@ -152,7 +152,7 @@ function addLinks(nom,child_peli){
 	a_link.setAttribute('href','/links/view/slug/'+nom+'/what/peli');
 	a_link.setAttribute('class','linky-winky');
 	a_link.setAttribute('target','_blank');
-	a_link.style.right="130px";
+	a_link.style.right="138px";
 	a_link.style.borderRadius="7px";
 	a_link.style.fontSize="smaller";
 	a_link.style.textDecoration="none";
@@ -161,8 +161,8 @@ function addLinks(nom,child_peli){
 	a_link.style.color="#000";
 	a_link.style.background="#fff";
 	a_link.style.display="inline-block";
-	a_link.style.padding="4px 2px 2px 4px";
-	a_link.style.width="28px";
+	a_link.style.padding="4px 0px 2px 2px";
+	a_link.style.width="18px";
 	a_link.style.top="18px";
 	a_link.style.position="absolute";
 	a_link.style.zIndex="1";
