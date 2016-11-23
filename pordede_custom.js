@@ -56,7 +56,8 @@ function edit2(){
 			document.getElementById("sections-list").appendChild(ep_iframe);
 			
 			doc = getFrameDocument(ep_iframe);
-			doc.getElementById("episodes-"+ep_season+"-"+document.getElementById("layout4").getAttribute("data-id")).getElementsByClassName("modelContainer defaultPopup")[ep_ep-1];
+			alert(doc.innerHTML);
+			//doc.getElementById("episodes-"+ep_season+"-"+document.getElementById("layout4").getAttribute("data-id")).getElementsByClassName("modelContainer defaultPopup")[ep_ep-1];
 		}
 		//
         deleteByClass("configMenu",0);
