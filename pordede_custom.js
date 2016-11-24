@@ -37,52 +37,73 @@ function edit2(){
         document.getElementById("stickyfooterWrapper").onclick=borra;
     }
     //
-    if ((window.location.href.endsWith(".com/")) || (window.location.href.endsWith("index"))){
-		//change direct links
-		var episodes_lk=document.getElementsByClassName("userepiinfo defaultLink");
-		var size_ep=episodes_lk.length;
-		for (var i_ep=0; i_ep<size_ep; i_ep++){
-			var child_ep=episodes_lk[i_ep];
-			
-			var src_lk="http://www.pordede.com/serie/the-walking-dead";
-			$.get(src_lk,{child_ep}, function(data,ep_ep){
-				//start html link
-				var ep_text=child_ep.innerHTML;
-				var ep_season=ep_text.substring(0,ep_text.indexOf("x"));
-				var ep_ep=Number(ep_text.replace(ep_season+"x",""));
-				//end html link
-			});
-			//doc.getElementById("episodes-"+ep_season+"-"+document.getElementById("layout4").getAttribute("data-id")).getElementsByClassName("modelContainer defaultPopup")[ep_ep-1];
+	var logIn_page=document.getElementById("login-form");
+	if (logIn_page===null){
+		if ((window.location.href.endsWith(".com/")) || (window.location.href.endsWith("index"))){
+			//put direct links
+			var episodes_lk=document.getElementsByClassName("userepiinfo defaultLink");
+			var size_ep=episodes_lk.length;
+			if (document.getElementsByClassName("linky-winky").length<size_ep){
+				for (var i_ep=1; i_ep<size_ep; i_ep++){
+					var child_ep=episodes_lk[i_ep];
+					var src_lk=child_ep.href;
+					$.ajax({
+						url: src_lk,
+						ep_text: child_ep.innerHTML,
+						success: function(data){
+							chg_ep(data , this.ep_text);
+							function chg_ep(data, ep_text){
+								//start html link
+								var ep_season=ep_text.substring(0,ep_text.indexOf("x"));
+								var ep_ep=Number(ep_text.replace(ep_season+"x",""));
+								var ep_start=data.indexOf("episodes-"+ep_season);
+								data=data.substr(ep_start,data.length-ep_start);
+								for (var pass_i=1;pass_i<ep_ep;pass_i++){
+									data=data.replace("modelContainer defaultPopup","");
+								}
+								var ep_start2=data.indexOf("modelContainer defaultPopup");
+								data=data.substr(ep_start2,data.length-ep_start2);
+								var ep_start3=data.indexOf("viewepisode");
+								data=data.substr(ep_start3+17,6);
+								console.log(data);
+								var lk_ep="/links/viewepisode/id/"+data;
+								addLinks(lk_ep,child_ep.parentNode);
+								//end html link
+							}
+						}
+					});
+				}
+			}
+			//
+			deleteByClass("configMenu",0);
+			deleteByClass("actionsContainer",0);
+			var child_title=document.getElementsByClassName("inline-subtitle");
+			if (child_title!==null && child_title!==undefined && child_title.length===3){
+				var calendar=document.getElementById("seriesCalendar");
+				if (calendar!==undefined && calendar!==null) calendar.style.marginTop="10px";
+				var x_box=document.getElementsByClassName("ddItemContainer modelContainer");
+				var i_box;
+				var size_box=x_box.length;
+				for (i_box=0; i_box <size_box; i_box++){
+					var child_box=x_box[x_box.length-1];
+					child_box.style.paddingTop="0px";
+				}
+				var ser=document.getElementsByClassName("listContainer listCovers inline clearfix")[0];
+				ser.style.marginTop="-11px";
+				ser.style.marginBottom="0px";
+				var pare_title1=child_title[0].parentNode;
+				pare_title1.removeChild(child_title[0]);
+				pare_title1.style.paddingBottom="0px";
+				pare_title1.style.paddingTop="0px";
+				var pare_title2=child_title[0].parentNode;
+				pare_title2.removeChild(child_title[0]);
+				pare_title2.style.paddingBottom="0px";
+				pare_title2.style.paddingTop="0px";
+			}
 		}
-		//
-        deleteByClass("configMenu",0);
-    	deleteByClass("actionsContainer",0);
-        var child_title=document.getElementsByClassName("inline-subtitle");
-        if (child_title!==null && child_title!==undefined && child_title.length===3){
-            var calendar=document.getElementById("seriesCalendar");
-            if (calendar!==undefined && calendar!==null) calendar.style.marginTop="10px";
-            var x_box=document.getElementsByClassName("ddItemContainer modelContainer");
-            var i_box;
-            var size_box=x_box.length;
-            for (i_box=0; i_box <size_box; i_box++){
-                var child_box=x_box[x_box.length-1];
-            	child_box.style.paddingTop="0px";
-            }
-            var ser=document.getElementsByClassName("listContainer listCovers inline clearfix")[0];
-            ser.style.marginTop="-11px";
-            ser.style.marginBottom="0px";
-            var pare_title1=child_title[0].parentNode;
-            pare_title1.removeChild(child_title[0]);
-            pare_title1.style.paddingBottom="0px";
-            pare_title1.style.paddingTop="0px";
-            var pare_title2=child_title[0].parentNode;
-            pare_title2.removeChild(child_title[0]);
-            pare_title2.style.paddingBottom="0px";
-            pare_title2.style.paddingTop="0px";
-        }
-    }
-    document.getElementsByClassName("defaultLink onlyLogin")[1].href="/pelis/pending";
-    //
+		document.getElementsByClassName("defaultLink onlyLogin")[1].href="/pelis/pending";
+	}
+	//
     getLinks();
     deleteLinks();
 }//end edit2
@@ -155,12 +176,12 @@ function addIMDB(enlace,child_peli){
 	});
 	child_peli.appendChild(a_IMDB);
 }
-function addLinks(nom,child_peli){
+function addLinks(link_name,child_peli){
 	var a_link=document.createElement("a");
 	var a_i_link=document.createElement("i");
 	a_i_link.className="icon-external-link";
 	a_link.appendChild(a_i_link);
-	a_link.setAttribute('href','/links/view/slug/'+nom+'/what/peli');
+	a_link.setAttribute('href',link_name);
 	a_link.setAttribute('class','linky-winky');
 	a_link.setAttribute('target','_blank');
 	a_link.style.right="138px";
@@ -192,7 +213,8 @@ function getLinks(){
             			var enlace=subenlace.href;
             			if (enlace.indexOf("http://www.pordede.com/peli/")>-1){
                             var nom=enlace.replace("http://www.pordede.com/peli/","");
-        					addLinks(nom,child_peli);
+							var link_name='/links/view/slug/'+nom+'/what/peli';
+        					addLinks(link_name,child_peli);
         					addIMDB(enlace,child_peli);
         					addFilmaffinity(nom,child_peli);
                 			editData(nom,child_peli);
