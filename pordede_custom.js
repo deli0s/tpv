@@ -44,7 +44,7 @@ function edit2(){
 			var episodes_lk=document.getElementsByClassName("userepiinfo defaultLink");
 			var size_ep=episodes_lk.length;
 			if (document.getElementsByClassName("linky-winky").length<size_ep){
-				for (var i_ep=1; i_ep<size_ep; i_ep++){
+				for (var i_ep=0; i_ep<size_ep; i_ep++){
 					var child_ep=episodes_lk[i_ep];
 					var src_lk=child_ep.href;
 					$.ajax({
@@ -65,7 +65,6 @@ function edit2(){
 								data=data.substr(ep_start2,data.length-ep_start2);
 								var ep_start3=data.indexOf("viewepisode");
 								data=data.substr(ep_start3+17,6);
-								console.log(data);
 								var lk_ep="/links/viewepisode/id/"+data;
 								addLinks(lk_ep,child_ep.parentNode);
 								//end html link
