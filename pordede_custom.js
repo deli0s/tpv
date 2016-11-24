@@ -43,16 +43,18 @@ function edit2(){
 			//put direct links
 			var episodes_lk=document.getElementsByClassName("userepiinfo defaultLink");
 			var size_ep=episodes_lk.length;
-			if (document.getElementsByClassName("linky-winky").length<size_ep){
+			if (document.getElementsByClassName("2-linky-winky").length<size_ep){
 				for (var i_ep=0; i_ep<size_ep; i_ep++){
 					var child_ep=episodes_lk[i_ep];
 					var src_lk=child_ep.href;
 					$.ajax({
 						url: src_lk,
-						ep_text: child_ep.innerHTML,
+						ep_i: i_ep,
 						success: function(data){
-							chg_ep(data , this.ep_text);
-							function chg_ep(data, ep_text){
+							chg_ep(data , this.ep_i);
+							function chg_ep(data, ep_i){
+								var child_ep_i=episodes_lk[ep_i];
+								var ep_text=child_ep_i.innerHTML
 								//start html link
 								var ep_season=ep_text.substring(0,ep_text.indexOf("x"));
 								var ep_ep=Number(ep_text.replace(ep_season+"x",""));
@@ -66,7 +68,14 @@ function edit2(){
 								var ep_start3=data.indexOf("viewepisode");
 								data=data.substr(ep_start3+17,6);
 								var lk_ep="/links/viewepisode/id/"+data;
-								addLinks(lk_ep,child_ep.parentNode);
+								addLinks2(lk_ep,child_ep_i.parentNode);
+								if (data.length!=6){
+									console.log("ERROR: La id: "+data+", te mida: "+data.length);
+									var a_ep_no=child_ep_i.parentNode.getElementsByTagName("a")[8];
+									if (a_ep_no!==undefined && a_ep_no!==null){
+										a_ep_no.style.display="none";
+									}
+								}
 								//end html link
 							}
 						}
@@ -174,6 +183,29 @@ function addIMDB(enlace,child_peli){
 		}
 	});
 	child_peli.appendChild(a_IMDB);
+}
+function addLinks2(link_name,child_peli){
+	var a_link=document.createElement("a");
+	var a_i_link=document.createElement("i");
+	a_i_link.className="icon-external-link";
+	a_link.appendChild(a_i_link);
+	a_link.setAttribute('href',link_name);
+	a_link.setAttribute('class','2-linky-winky');
+	a_link.setAttribute('target','_blank');
+	a_link.style.borderRadius="7px";
+	a_link.style.fontSize="smaller";
+	a_link.style.textDecoration="none";
+	a_link.style.cursor="pointer";
+	a_link.style.border="1px solid #ccc";
+	a_link.style.color="#000";
+	a_link.style.background="#fff";
+	a_link.style.display="inline-block";
+	a_link.style.padding="4px 0px 2px 2px";
+	a_link.style.width="18px";
+	a_link.style.margin="0px";
+	a_link.style.marginLeft="5px";
+	a_link.style.zIndex="1";
+	child_peli.appendChild(a_link);
 }
 function addLinks(link_name,child_peli){
 	var a_link=document.createElement("a");
