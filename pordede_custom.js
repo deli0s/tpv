@@ -44,7 +44,7 @@ function edit2(){
 			var episodes_lk=document.getElementsByClassName("userepiinfo defaultLink");
 			var size_ep=episodes_lk.length;
 			if (document.getElementsByClassName("2-linky-winky").length<size_ep){
-				for (var i_ep=0; i_ep<size_ep; i_ep++){
+				for (var i_ep=0; i_ep<5; i_ep++){
 					var child_ep=episodes_lk[i_ep];
 					var src_lk=child_ep.href;
 					$.ajax({
@@ -68,12 +68,14 @@ function edit2(){
 								var ep_start3=data.indexOf("viewepisode");
 								data=data.substr(ep_start3+17,6);
 								var lk_ep="/links/viewepisode/id/"+data;
-								addLinks2(lk_ep,child_ep_i.parentNode);
-								if (data.length!=6){
-									console.log("ERROR: La id: "+data+", te mida: "+data.length);
-									var a_ep_no=child_ep_i.parentNode.getElementsByTagName("a")[8];
-									if (a_ep_no!==undefined && a_ep_no!==null){
-										a_ep_no.style.display="none";
+								if (child_ep_i.parentNode.getElementsByClassName("2-linky-winky").length<1){
+									addLinks2(lk_ep,child_ep_i.parentNode);
+									if (data.length!=6){
+										console.log("ERROR: La id: "+data+", te mida: "+data.length);
+										var a_ep_no=child_ep_i.parentNode.getElementsByTagName("a")[8];
+										if (a_ep_no!==undefined && a_ep_no!==null){
+											a_ep_no.style.display="none";
+										}
 									}
 								}
 								//end html link
