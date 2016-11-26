@@ -44,7 +44,7 @@ function edit2(){
 			var episodes_lk=document.getElementsByClassName("userepiinfo defaultLink");
 			var size_ep=episodes_lk.length;
 			if (document.getElementsByClassName("2-linky-winky").length<size_ep){
-				for (var i_ep=0; i_ep<5; i_ep++){
+				for (var i_ep=0; i_ep<size_ep; i_ep++){
 					var child_ep=episodes_lk[i_ep];
 					var src_lk=child_ep.href;
 					$.ajax({
