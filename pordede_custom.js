@@ -24,6 +24,11 @@ function edit2(){
         document.getElementById("up").parentNode.appendChild(divtest);
     }
     //
+    if (window.location.href.indexOf("viewepisode") > -1){
+        document.getElementsByClassName("defaultPopup")[1].className="";
+        document.getElementsByClassName("defaultPopup")[2].className="";
+    }
+    //
     if (window.location.href.indexOf("pordede.com/aporte/") > -1){
         window.location.replace(document.getElementsByClassName("episodeText")[0]);
     }
