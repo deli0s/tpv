@@ -27,6 +27,8 @@ function edit2(){
     if (window.location.href.indexOf("viewepisode") > -1){
         document.getElementsByClassName("defaultPopup")[1].className="";
         document.getElementsByClassName("defaultPopup")[2].className="";
+		var title_eps=document.getElementsByTagName("h2")[0].innerHTML.replace("Enlaces de ","");
+		document.title=title_eps;
     }
     //
     if (window.location.href.indexOf("pordede.com/aporte/") > -1){
