@@ -26,8 +26,8 @@ function edit2(){
     //
     if (window.location.href.indexOf("viewepisode") > -1){
 		var v_ep=document.getElementsByClassName("defaultPopup");
-		for (var i_vEp=1;i_vEp<2;i_vEp++){
-			var elem_vEp=v_ep[i_vEp];
+		for (var i_vEp=1;i_vEp<=2;i_vEp++){
+			var elem_vEp=v_ep[1];
 			if (elem_vEp.innerHTML=="Ver capítulo"){
 				elem_vEp.className="";
 			}
