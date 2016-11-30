@@ -50,7 +50,7 @@ function edit2(){
     //
 	var logIn_page=document.getElementById("login-form");
 	if (logIn_page===null){
-		if ((window.location.href.endsWith(".com/")) || (window.location.href.endsWith("index.php"))){
+		if ((window.location.href.endsWith(".com/")) || (window.location.href.endsWith("index")) || (window.location.href.endsWith("index.php"))){
 			//put direct links
 			var episodes_lk=document.getElementsByClassName("userepiinfo defaultLink");
 			var size_ep=episodes_lk.length;
