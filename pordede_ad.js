@@ -58,7 +58,7 @@ function edit(){
     for (var i_menu=0;i_menu<2;i_menu++){
     	deleteByClass("defaultLink listasLink onlyLogin",1);
     }
-    if ((window.location.href.endsWith(".com/")) || (window.location.href.endsWith("index"))){
+    if ((window.location.href.endsWith(".com/")) || (window.location.href.endsWith("index")) || (window.location.href.endsWith("index.php"))){
         var today=document.getElementsByClassName("fc-today")[0];
         if (today!==undefined && today!==null){
             today.style.color="beige";
