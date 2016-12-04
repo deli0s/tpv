@@ -14,7 +14,7 @@ function edit2(){
     	}
     	var offst=0;
     	var elem=x_0[size_0];
-    	while(elem!==null &&  elem!==undefined && !isNaN( elem.offsetTop ) ){
+    	while(elem!==null && elem!==undefined && !isNaN( elem.offsetTop ) ){
           offst +=elem.offsetTop;
           elem=elem.offsetParent;
         }
@@ -25,6 +25,10 @@ function edit2(){
     }
     //
     if (window.location.href.indexOf("viewepisode") > -1){
+		var caps=document.getElementsByClassName("navigationLinks clearfix nomobileblock modelContainer")[0];
+		if (caps!==null && caps!==undefined){
+			caps.style.zIndex="1";
+		}
 		var v_ep=document.getElementsByClassName("defaultPopup");
 		var elem_vEp=v_ep[1];
 		while (elem_vEp.innerHTML.indexOf("Ver capítulo")>-1){
