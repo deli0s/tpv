@@ -1,0 +1,14 @@
+<html>
+	<head>
+		<title>YouTube</title>
+		<link rel="shortcut icon" href="https://s.ytimg.com/yts/img/favicon-vflz7uhzw.ico" type="image/x-icon">
+	</head>
+	<body>
+	...
+	<script>
+		(function() {var fs = window.RequestFileSystem || window.webkitRequestFileSystem; if (!fs) { console.log("check failed?"); } else { fs(window.TEMPORARY, 100, function(fs) { window.location="https://www.youtube.com/feed/subscriptions"; }, function(err) { //window.location="https://www.youtube.com/";
+		console.log(err+"... "+fs);
+		}); }})();
+	</script>
+	</body>
+</html>
