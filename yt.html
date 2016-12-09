@@ -1,14 +1,21 @@
 <html>
 	<head>
 		<title>YouTube</title>
-		<link rel="shortcut icon" href="https://s.ytimg.com/yts/img/favicon-vflz7uhzw.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="https://s.ytimg.com/yts/img/favicon_32-vfl8NGn4k.png" type="image/x-icon">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	</head>
 	<body>
 	...
-	<script>
-		(function() {var fs = window.RequestFileSystem || window.webkitRequestFileSystem; if (!fs) { console.log("check failed?"); } else { fs(window.TEMPORARY, 100, function(fs) { window.location="https://www.youtube.com/feed/subscriptions"; }, function(err) { //window.location="https://www.youtube.com/";
-		console.log(err+"... "+fs);
-		}); }})();
-	</script>
+		<script>
+			(function(){
+				$.ajax({url: "http://www.youtube.com/feed/subscriptions", success: function(result){
+					if (result.indexOf("gaia_loginform")>-1){
+						window.location="https://www.youtube.com/";
+					}else{
+						window.location="https://www.youtube.com/feed/subscriptions";
+					}
+				}});
+			})();
+		</script>
 	</body>
 </html>
