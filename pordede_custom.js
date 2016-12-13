@@ -24,7 +24,7 @@ function edit2(){
         document.getElementById("up").parentNode.appendChild(divtest);
     }
     //
-    if (window.location.href.indexOf("viewepisode") > -1){
+    if ((window.location.href.indexOf("viewepisode") > -1) || (window.location.href.indexOf("view/") > -1)){
 		var caps=document.getElementsByClassName("navigationLinks clearfix nomobileblock modelContainer")[0];
 		if (caps!==null && caps!==undefined){
 			caps.style.zIndex="1";
@@ -74,6 +74,8 @@ function edit2(){
 								var ep_season=ep_text.substring(0,ep_text.indexOf("x"));
 								var ep_ep=Number(ep_text.replace(ep_season+"x",""));
 								var ep_start=data.indexOf("episodes-"+ep_season);
+								// var rex = new RegExp(/(episodes-)+ep_season+(.|\s)*(class="number">)/);
+								//data.search(rex);
 								data=data.substr(ep_start,data.length-ep_start);
 								for (var pass_i=1;pass_i<ep_ep;pass_i++){
 									data=data.replace("modelContainer defaultPopup","");
