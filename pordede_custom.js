@@ -88,7 +88,7 @@ function edit2(){
 								if (child_ep_i.parentNode.getElementsByClassName("2-linky-winky").length<1){
 									if (lk_ep!==undefined && lk_ep!==null){
 										addLinks2(lk_ep,child_ep_i.parentNode);
-										console.log("ERROR: La id: "+data+", te mida: "+data.length);
+										console.log("ERROR: La id: "+lk_ep+", te mida: "+lk_ep.length);
 										var a_ep_no=child_ep_i.parentNode.getElementsByTagName("a")[8];
 										if (a_ep_no!==undefined && a_ep_no!==null){
 											a_ep_no.style.display="none";
