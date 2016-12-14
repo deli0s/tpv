@@ -70,21 +70,21 @@ function edit2(){
 							function chg_ep(data, ep_i){
 								var child_ep_i=episodes_lk[ep_i];
 								var ep_text=child_ep_i.innerHTML
-								//start html link
-								var ep_season=ep_text.substring(0,ep_text.indexOf("x"));
-								var ep_ep=Number(ep_text.replace(ep_season+"x",""));
+								var ep_season=ep_text.substring(0,ep_text.indexOf("x"));//nº season
+								var ep_ep=(ep_text.replace(ep_season+"x",""));//nº ep
 								var ep_start=data.indexOf("episodes-"+ep_season);
-								// var rex = new RegExp(/(episodes-)+ep_season+(.|\s)*(class="number">)/);
-								//data.search(rex);
 								data=data.substr(ep_start,data.length-ep_start);
-								for (var pass_i=1;pass_i<ep_ep;pass_i++){
+								/*for (var pass_i=1;pass_i<ep_ep;pass_i++){
 									data=data.replace("modelContainer defaultPopup","");
 								}
 								var ep_start2=data.indexOf("modelContainer defaultPopup");
 								data=data.substr(ep_start2,data.length-ep_start2);
 								var ep_start3=data.indexOf("viewepisode");
 								data=data.substr(ep_start3+17,6);
-								var lk_ep="/links/viewepisode/id/"+data;
+								var lk_ep="/links/viewepisode/id/"+data;*/
+								var rex = new RegExp('\\/links\/viewepisode\/id\/[0-9]*.{0,8}class="number">'+ep_ep);
+								var lk_ep_str = String(data.match(rex));
+								var lk_ep=lk_ep_str.replace('"><span class="number">'+ep_ep,'')
 								if (child_ep_i.parentNode.getElementsByClassName("2-linky-winky").length<1){
 									addLinks2(lk_ep,child_ep_i.parentNode);
 									if (data.length!=6){
