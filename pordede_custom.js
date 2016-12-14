@@ -86,8 +86,8 @@ function edit2(){
 								var lk_ep_str = String(data.match(rex));
 								var lk_ep=lk_ep_str.replace('"><span class="number">'+ep_ep,'')
 								if (child_ep_i.parentNode.getElementsByClassName("2-linky-winky").length<1){
-									addLinks2(lk_ep,child_ep_i.parentNode);
-									if (data.length!=6){
+									if (lk_ep!==undefined && lk_ep!==null){
+										addLinks2(lk_ep,child_ep_i.parentNode);
 										console.log("ERROR: La id: "+data+", te mida: "+data.length);
 										var a_ep_no=child_ep_i.parentNode.getElementsByTagName("a")[8];
 										if (a_ep_no!==undefined && a_ep_no!==null){
