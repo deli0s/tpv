@@ -1,3 +1,4 @@
+var thepiratebay="https://thepiratebay.cr/search/";
 function edit2(){
     if ($('[id^=up]').length==1){
         var divtest=document.createElement("div");
@@ -155,6 +156,25 @@ if (data.search(/video.{0,200}(Rip|Hd).{0,200}headphones/i)===-1){
 }
 //end html link
 });}
+function addPirate(nom,child_peli){
+	var a_FA=document.createElement("a");
+	var img_FA=document.createElement("img");
+	img_FA.src="https://raw.githubusercontent.com/4shadoww/UnblockedPiratebayNA/master/favicon.ico";
+	img_FA.style.width="19px";
+	img_FA.style.textDecoration="none";
+	a_FA.style.position="absolute";
+	a_FA.style.textDecoration="none";
+	a_FA.style.padding="0";
+	a_FA.style.zIndex="1";
+	a_FA.style.top="90px";
+	a_FA.style.display="inline-block";
+	a_FA.style.right="140px";
+	a_FA.setAttribute('target','_blank');
+	a_FA.appendChild(img_FA);
+	a_FA.style.cursor="pointer";
+	a_FA.setAttribute('href',thepiratebay+nom.replace(/-/g,"%20"));
+	child_peli.appendChild(a_FA);
+}
 function addFilmaffinity(nom,child_peli){
 	var a_FA=document.createElement("a");
 	var img_FA=document.createElement("img");
@@ -263,6 +283,7 @@ function getLinks(){
         					addLinks(link_name,child_peli);
         					addIMDB(enlace,child_peli);
         					addFilmaffinity(nom,child_peli);
+        					addPirate(nom,child_peli);
                 			editData(nom,child_peli);
                 		}
             		}
