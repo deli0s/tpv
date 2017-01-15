@@ -29,16 +29,18 @@ function edit(){
         deleteByClass("ad boxed",0);
     	//
     	var llink=document.getElementsByClassName("info moreinfoLink")[0];
-    	var link_cast0=llink.getElementsByTagName("a");
-		if (link_cast0!==undefined && link_cast0!==null){
-			var link_cast=link_cast0[0].href;
-			if (!link_cast.endsWith("tt_ql_1")){
-				document.getElementsByClassName("info moreinfoLink")[0].getElementsByTagName("a")[0].href=link_cast+"fullcredits?ref_=tt_ql_1";
-				var enlace=window.location.href;
-				if (enlace!==undefined && enlace!==null){
-					var nom_serie=enlace.replace("serie","peli");
-					var nom=nom_serie.replace("http://www.pordede.com/peli/","");
-					addF2(nom,llink);
+		if (llink!==undefined && llink!==null){
+			var link_cast0=llink.getElementsByTagName("a");
+			if (link_cast0!==undefined && link_cast0!==null){
+				var link_cast=link_cast0[0].href;
+				if (!link_cast.endsWith("tt_ql_1")){
+					document.getElementsByClassName("info moreinfoLink")[0].getElementsByTagName("a")[0].href=link_cast+"fullcredits?ref_=tt_ql_1";
+					var enlace=window.location.href;
+					if (enlace!==undefined && enlace!==null){
+						var nom_serie=enlace.replace("serie","peli");
+						var nom=nom_serie.replace("http://www.pordede.com/peli/","");
+						addF2(nom,llink);
+					}
 				}
 			}
 		}
