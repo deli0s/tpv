@@ -128,6 +128,19 @@ function edit2(){
 		document.getElementsByClassName("defaultLink onlyLogin")[1].href="/pelis/pending";
 	}
 	//
+	if ((window.location.href.indexOf("pordede.com/peli/") > -1) || (window.location.href.indexOf("pordede.com/serie/") > -1)){
+		if (document.getElementById("TPB")===null){
+			var llink=document.getElementsByClassName("info moreinfoLink")[0];
+			if (llink!==undefined && llink!==null){
+			var enlace=window.location.href;
+				if (enlace!==undefined && enlace!==null){
+					var nom_serie=enlace.replace("serie","peli");
+					var nom=nom_serie.replace("http://www.pordede.com/peli/","");
+					addPirate2(nom,llink);
+				}
+			}
+		}
+	}
     getLinks();
     deleteLinks();
 }//end edit2
@@ -156,6 +169,22 @@ if (data.search(/video.{0,200}(Rip|Hd).{0,200}headphones/i)===-1){
 }
 //end html link
 });}
+function addPirate2(nom,llink){
+    var a_Pirate=document.createElement("a");
+	a_Pirate.id="TPB";
+	a_Pirate.style.position="relative";
+	a_Pirate.style.left="40px";
+	a_Pirate.textContent="ThePirateBay";
+	a_Pirate.setAttribute('target','_blank');
+	a_Pirate.style.cursor="pointer";
+	a_Pirate.setAttribute('href',thepiratebay+nom.replace(/-/g,"%20"));
+	llink.appendChild(a_Pirate);
+	var img_P=document.createElement("img");
+	img_P.src="https://raw.githubusercontent.com/4shadoww/UnblockedPiratebayNA/master/favicon.ico";
+	img_P.style.width="23px";
+	img_P.style.marginLeft="-128px";
+	a_Pirate.insertBefore(img_P,a_Pirate.childNodes[0]);
+}
 function addPirate(nom,child_peli){
 	var a_Pirate=document.createElement("a");
 	var img_P=document.createElement("img");
