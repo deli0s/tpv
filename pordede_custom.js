@@ -157,23 +157,23 @@ if (data.search(/video.{0,200}(Rip|Hd).{0,200}headphones/i)===-1){
 //end html link
 });}
 function addPirate(nom,child_peli){
-	var a_FA=document.createElement("a");
-	var img_FA=document.createElement("img");
-	img_FA.src="https://raw.githubusercontent.com/4shadoww/UnblockedPiratebayNA/master/favicon.ico";
-	img_FA.style.width="19px";
-	img_FA.style.textDecoration="none";
-	a_FA.style.position="absolute";
-	a_FA.style.textDecoration="none";
-	a_FA.style.padding="0";
-	a_FA.style.zIndex="1";
-	a_FA.style.top="90px";
-	a_FA.style.display="inline-block";
-	a_FA.style.right="140px";
-	a_FA.setAttribute('target','_blank');
-	a_FA.appendChild(img_FA);
-	a_FA.style.cursor="pointer";
-	a_FA.setAttribute('href',thepiratebay+nom.replace(/-/g,"%20"));
-	child_peli.appendChild(a_FA);
+	var a_Pirate=document.createElement("a");
+	var img_P=document.createElement("img");
+	img_P.src="https://raw.githubusercontent.com/4shadoww/UnblockedPiratebayNA/master/favicon.ico";
+	img_P.style.width="19px";
+	img_P.style.textDecoration="none";
+	a_Pirate.style.position="absolute";
+	a_Pirate.style.textDecoration="none";
+	a_Pirate.style.padding="0";
+	a_Pirate.style.zIndex="1";
+	a_Pirate.style.top="90px";
+	a_Pirate.style.display="inline-block";
+	a_Pirate.style.right="140px";
+	a_Pirate.setAttribute('target','_blank');
+	a_Pirate.appendChild(img_P);
+	a_Pirate.style.cursor="pointer";
+	a_Pirate.setAttribute('href',thepiratebay+nom.replace(/-/g,"%20"));
+	child_peli.appendChild(a_Pirate);
 }
 function addFilmaffinity(nom,child_peli){
 	var a_FA=document.createElement("a");
