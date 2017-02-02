@@ -70,7 +70,7 @@ function edit2(){
 							chg_ep(data , this.ep_i);
 							function chg_ep(data, ep_i){
 								var child_ep_i=episodes_lk[ep_i];
-								var ep_text=child_ep_i.innerHTML
+								var ep_text=child_ep_i.innerHTML;
 								var ep_season=ep_text.substring(0,ep_text.indexOf("x"));//nº season
 								var ep_ep=Number(ep_text.replace(ep_season+"x",""));//nº ep
 								var ep_start=data.indexOf("episodes-"+ep_season);
@@ -81,9 +81,8 @@ function edit2(){
 								var trobat=false;
 								var pass_i=1;
 								while (!trobat && data.indexOf("modelContainer defaultPopup")>-1){
-									var ep_ini=data.indexOf("class=\"number\">"+ep_ep);
-									trobat=(ep_ini<=500);
-									console.log(data.substr(0,230));
+									var ep_ini=data.indexOf("class=\\\"number\\\">"+ep_ep);
+									trobat=(ep_ini<=480);
 									if (!trobat){
 										var model="modelContainer defaultPopup";
 										var ep_start2=data.indexOf(model);
@@ -91,7 +90,7 @@ function edit2(){
 									}
 									pass_i++;
 								}
-								ep_ini=data.indexOf("class=\"number\">"+ep_ep);
+								ep_ini=data.indexOf("class=\\\"number\\\">"+ep_ep);
 								trobat=(ep_ini<=230);
 								if (trobat){
 									var ep_start3=data.indexOf("viewepisode");
