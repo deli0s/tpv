@@ -94,7 +94,7 @@ function edit2(){
 								trobat=(ep_ini<=230);
 								if (trobat){
 									var ep_start3=data.indexOf("viewepisode");
-									data=data.substr(ep_start3+15,6);
+									data=data.substr(ep_start3+17,6);
 									var lk_ep="/links/viewepisode/id/"+data;
 									if (child_ep_i.parentNode.getElementsByClassName("2-linky-winky").length<1){
 										addLinks2(lk_ep,child_ep_i.parentNode);
