@@ -75,24 +75,37 @@ function edit2(){
 								var ep_ep=Number(ep_text.replace(ep_season+"x",""));//nº ep
 								var ep_start=data.indexOf("episodes-"+ep_season);
 								data=data.substr(ep_start,data.length-ep_start);
-								for (var pass_i=1;pass_i<ep_ep;pass_i++){
+								/*for (var pass_i=1;pass_i<ep_ep;pass_i++){
 									data=data.replace("modelContainer defaultPopup","");
+								}*/
+								var trobat=false;
+								var pass_i=1;
+								while (!trobat && data.indexOf("modelContainer defaultPopup")>-1){
+									var ep_ini=data.indexOf("class=\"number\">"+ep_ep);
+									trobat=(ep_ini<=230);
+									if (!trobat){
+										var model="modelContainer defaultPopup";
+										var ep_start2=data.indexOf(model);
+										data=data.substr(ep_start2+model.length,data.length-ep_start2);
+									}
+									pass_i++;
 								}
-								var ep_start2=data.indexOf("modelContainer defaultPopup");
-								data=data.substr(ep_start2,data.length-ep_start2);
-								var ep_start3=data.indexOf("viewepisode");
-								data=data.substr(ep_start3+17,6);
-								var lk_ep="/links/viewepisode/id/"+data;
-								if (child_ep_i.parentNode.getElementsByClassName("2-linky-winky").length<1){
-									addLinks2(lk_ep,child_ep_i.parentNode);
-									if (data.length!=6){
-										console.log("ERROR: La id: "+data+", te mida: "+data.length);
-										var a_ep_no=child_ep_i.parentNode.getElementsByTagName("a")[8];
-										if (a_ep_no!==undefined && a_ep_no!==null){
-											a_ep_no.style.display="none";
+								ep_ini=data.indexOf("class=\"number\">"+ep_ep);
+								trobat=(ep_ini<=230);								if (trobat){
+									var ep_start3=data.indexOf("viewepisode");
+									data=data.substr(ep_start3+17,6);
+									var lk_ep="/links/viewepisode/id/"+data;
+									if (child_ep_i.parentNode.getElementsByClassName("2-linky-winky").length<1){
+										addLinks2(lk_ep,child_ep_i.parentNode);
+										if (data.length!=6){
+											console.log("ERROR: "+ep_text+", te mida: "+data.length);
+											var a_ep_no=child_ep_i.parentNode.getElementsByTagName("a")[8];
+											if (a_ep_no!==undefined && a_ep_no!==null){
+												a_ep_no.style.display="none";
+											}
 										}
 									}
-								}
+								}else console.log("ERROR: "+ep_text+", te mida: "+data.length);
 							}
 						}
 					});
