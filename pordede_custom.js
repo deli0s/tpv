@@ -83,6 +83,7 @@ function edit2(){
 								while (!trobat && data.indexOf("modelContainer defaultPopup")>-1){
 									var ep_ini=data.indexOf("class=\"number\">"+ep_ep);
 									trobat=(ep_ini<=230);
+									console.log(data.substr(0,230));
 									if (!trobat){
 										var model="modelContainer defaultPopup";
 										var ep_start2=data.indexOf(model);
