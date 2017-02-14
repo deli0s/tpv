@@ -15,8 +15,9 @@ function edit(){
 						var late=(late_h3.innerHTML.indexOf("LATE MOTIV")>-1);
 						var late_david=(late_h3.innerHTML.indexOf("Broncano")>-1);
 						var late_berto=(late_h3.innerHTML.indexOf("Romero")>-1);
+						var late_ign=(late_h3.innerHTML.indexOf("ignatius")>-1);
 						if (late){
-							if (!late_david && !late_berto){
+							if (!late_david && !late_berto && !late_ign){
 								deleteByClass("yt-shelf-grid-item",i_video);
 								i_video--;
 							}
