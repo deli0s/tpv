@@ -194,7 +194,7 @@ function addPirate2(nom,llink){
 	a_Pirate.setAttribute('href',thepiratebay+nom.replace(/-/g,"%20"));
 	llink.appendChild(a_Pirate);
 	var img_P=document.createElement("img");
-	img_P.src="https://raw.githubusercontent.com/4shadoww/UnblockedPiratebayNA/master/favicon.ico";
+	img_P.src="https://rawgit.com/deli0s/js/master/tpb.png";
 	img_P.style.width="23px";
 	img_P.style.marginLeft="-128px";
 	a_Pirate.insertBefore(img_P,a_Pirate.childNodes[0]);
@@ -202,7 +202,7 @@ function addPirate2(nom,llink){
 function addPirate(nom,child_peli){
 	var a_Pirate=document.createElement("a");
 	var img_P=document.createElement("img");
-	img_P.src="https://raw.githubusercontent.com/4shadoww/UnblockedPiratebayNA/master/favicon.ico";
+	img_P.src="https://rawgit.com/deli0s/js/master/tpb.png";
 	img_P.style.width="19px";
 	img_P.style.textDecoration="none";
 	a_Pirate.style.position="absolute";
