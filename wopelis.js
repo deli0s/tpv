@@ -5,7 +5,8 @@ function edit(){
 	sheet.insertRule('@media (min-width: 580px) {div.link{ margin:0 5% 0 5%;}div.link{background-color:#e8e8e8;clear:both;width:80%;padding:10px;float:left;border:solid 1px #dcdcdc;max-width:1050px;min-width:365px}', sheet.cssRules.length);
 	//
 	if (window.location.href.indexOf("venlaces") > -1){
-		deleteLinks();
+		deleteScreener();
+		deleteUrlTester();
 	}
 }//end edit
 
@@ -48,7 +49,7 @@ function creaFolder(f,ttl,sub,f_txt){
     }
 }
 
-function deleteLinks(){
+function deleteScreener(){
     creaFolder("folder","folder_title","folder_scr"," Screener (0)");
     creaFolder("folder_lat","folder_title_lat","folder_lat"," LAT (0)");
     
@@ -65,26 +66,29 @@ function deleteLinks(){
         	var quality=child_link2.getElementsByTagName('span')[0].innerHTML;
         	if (quality.indexOf("Screener")===-1){
         	    scr_non++;
-				var report=Number(child_link2.getElementsByTagName('span')[5].innerHTML);
-            	if (report>=2){
-            		var pare_link2=child_link2;
-            		pare_link2.innerHTML="<a style=' color: maroon; font-weight: bolder;' title='"+report+"'> Esborrat </a>";
-            		i_link2--;
-            	}else{
-            	    if (child_link2.getElementsByTagName("img")[1].src.indexOf("arg")>-1){
-						//var pare_lat=child_link2;
-            	        if ((scr_hide+scr_non)<size_link2){
-                	        //var cln_lat = pare_lat.cloneNode(true);
-                	        var cln_lat = child_link2.cloneNode(true);
-                            cln_lat.className="link";
-                            document.getElementById("folder_lat").appendChild(cln_lat);
-                	        lat++;
-            	        }
-                		//pare_lat.innerHTML="";
-						deleteMe(child_link2);
-                		i_link2--;
-            	    }
-            	}
+				var report_=child_link2.getElementsByTagName('span')[5];
+				if (existeix(report_)){
+					var report=Number(report_.innerHTML);
+					if (report>=2){
+						var pare_link2=child_link2;
+						pare_link2.innerHTML="<a style=' color: maroon; font-weight: bolder;' title='"+report+"'> Esborrat </a>";
+						i_link2--;
+					}else{
+						if (child_link2.getElementsByTagName("img")[1].src.indexOf("arg")>-1){
+							//var pare_lat=child_link2;
+							if ((scr_hide+scr_non)<size_link2){
+								//var cln_lat = pare_lat.cloneNode(true);
+								var cln_lat = child_link2.cloneNode(true);
+								cln_lat.className="link";
+								document.getElementById("folder_lat").appendChild(cln_lat);
+								lat++;
+							}
+							//pare_lat.innerHTML="";
+							deleteMe(child_link2);
+							i_link2--;
+						}
+					}
+				}
         	}else{
         	    //var pare_link3=child_link2;
         	    if ((scr_hide+scr_non)<size_link2){
@@ -106,6 +110,14 @@ function deleteLinks(){
     if (lat>0){
         document.getElementById("folder_title_lat").innerHTML=document.getElementById("folder_title_lat").innerHTML.replace("(0)","("+lat+")");
     }
+}
+function deleteUrlTester(nom){
+	var urlTester=document.getElementsByTagName("a")[6];
+	if (existeix(urlTester)){
+		if (urlTester.innerHTML.indexOf("urltester")>-1){
+			deleteMe(urlTester.parentNode);
+		}
+	}
 }
 function deleteById(nom){
 	var childAdv=document.getElementById(nom);
@@ -138,5 +150,5 @@ function reload(){
         // error
     }
 }
-document.getElementsByTagName("body")[0].onclick=reload;
-document.getElementsByTagName("body")[0].addEventListener("wheel",reload);
+document.body.onclick=reload;
+document.body.addEventListener("wheel",reload);
