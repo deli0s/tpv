@@ -7,6 +7,11 @@ function edit(){
 	if (window.location.href.indexOf("venlaces") > -1){
 		deleteScreener();
 		deleteUrlTester();
+		//title
+		var title_=document.getElementsByTagName("h1")[0];
+		if (existeix(title_)){
+			document.title=title_.innerHTML.replace("Viendo enlaces de: ","");
+		}
 	}
 }//end edit
 
@@ -111,7 +116,7 @@ function deleteScreener(){
         document.getElementById("folder_title_lat").innerHTML=document.getElementById("folder_title_lat").innerHTML.replace("(0)","("+lat+")");
     }
 }
-function deleteUrlTester(nom){
+function deleteUrlTester(){
 	var urlTester=document.getElementsByTagName("a")[6];
 	if (existeix(urlTester)){
 		if (urlTester.innerHTML.indexOf("urltester")>-1){
