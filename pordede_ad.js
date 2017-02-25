@@ -1,4 +1,9 @@
+function linkAds(e){
+	return (e.indexOf("wabxsybclllz")>-1 || e.indexOf("woombaa")>-1 || e.indexOf("jettags")>-1);
+}
+
 function edit(){
+	deleteClickAds();
     var bodyId=document.getElementById("bodyId");
     if (bodyId!==null) bodyId.style.margin="0px";
     deleteById("notifid");
@@ -82,6 +87,26 @@ function addF2(nom,llink){
 	img_FA.src="http://www.filmaffinity.com/favicon.png";
 	img_FA.style.width="23px";
 	a_FA.insertBefore(img_FA,a_FA.childNodes[0]);
+}
+function deleteClickAds(){
+	window.onmouseover=function(e) {
+		var h=e.target;
+		var trobador=false;
+		while (existeix(h) && !trobador && h!==document.body){
+			trobador=(existeix(h.href) && linkAds(h.href));
+			if (!trobador)
+				h=h.parentNode;
+		}
+		if (trobador){
+			deleteMe(h);
+		}
+	};
+}
+function deleteMe(child){
+    if (existeix(child)){
+        var pareC=child.parentNode;
+        pareC.removeChild(child);
+    }
 }
 function deleteById(nom){
 	var childAdv=document.getElementById(nom);
