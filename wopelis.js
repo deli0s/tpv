@@ -5,6 +5,7 @@ function linkAds(e){
 function edit(){
 	//
 	deleteClickAds();
+	deleteScriptAds();
 	//CSS
 	var sheet = window.document.styleSheets[0];
 	sheet.insertRule('button:hover,input[type=submit]:hover,.dropdownContainer.blue:hover{background:#0a5bc2;}', sheet.cssRules.length);
@@ -20,6 +21,20 @@ function edit(){
 		}
 	}
 }//end edit
+
+function deleteScriptAds(){
+    var x_script=document.getElementsByTagName("script");
+    var size_script=x_script.length;
+    for (var i_script=0; i_script<size_script; i_script++){
+        var child_script=x_script[i_script];
+        if (existeix(child_script)){
+			if (child_script.src.indexOf("wabxsybclllz")>-1 || child_script.src.indexOf("ads")>-1){
+				deleteMe(child_script);
+        		i_script--;
+        	}
+        }
+    }
+}
 
 function deleteClickAds(){
 	window.onmouseover=function(e) {
