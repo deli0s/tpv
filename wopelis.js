@@ -1,4 +1,10 @@
+function linkAds(e){
+	return (e.indexOf("wabxsybclllz")>-1 || e.indexOf("woombaa")>-1 || e.indexOf("jettags")>-1);
+}
+
 function edit(){
+	//
+	deleteClickAds();
 	//CSS
 	var sheet = window.document.styleSheets[0];
 	sheet.insertRule('button:hover,input[type=submit]:hover,.dropdownContainer.blue:hover{background:#0a5bc2;}', sheet.cssRules.length);
@@ -14,6 +20,21 @@ function edit(){
 		}
 	}
 }//end edit
+
+function deleteClickAds(){
+	window.onmouseover=function(e) {
+		var h=e.target;
+		var trobador=false;
+		while (existeix(h) && !trobador && h!==document.body){
+			trobador=(existeix(h.href) && linkAds(h.href));
+			if (!trobador)
+				h=h.parentNode;
+		}
+		if (trobador){
+			deleteMe(h);
+		}
+	};
+}
 
 function creaFolder(f,ttl,sub,f_txt){
     if (document.getElementsByClassName(f).length<=0){
