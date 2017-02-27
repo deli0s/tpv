@@ -102,6 +102,9 @@ function deleteClickAds(){
 		}
 	};
 }
+function existeix(nom){
+	return (nom!==undefined && nom!==null);
+}
 function deleteMe(child){
     if (existeix(child)){
         var pareC=child.parentNode;
