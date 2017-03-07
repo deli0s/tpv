@@ -75,14 +75,14 @@ function edit2(){
 								var ep_ep=Number(ep_text.replace(ep_season+"x",""));//nº ep
 								var ep_start=data.indexOf("episodes-"+ep_season);
 								data=data.substr(ep_start,data.length-ep_start);
-								/*for (var pass_i=1;pass_i<ep_ep;pass_i++){
-									data=data.replace("modelContainer defaultPopup","");
-								}*/
 								var trobat=false;
 								var pass_i=1;
+								var ep_ini;
+								var ep_ini2;
 								while (!trobat && data.indexOf("modelContainer defaultPopup")>-1){
-									var ep_ini=data.indexOf("class=\\\"number\\\">"+ep_ep);
-									trobat=(ep_ini<=480);
+									ep_ini=data.indexOf("class=\\\"number\\\">"+ep_ep);
+									ep_ini2=data.indexOf("Episodio "+ep_ep);
+									trobat=((ep_ini<=480 && ep_ini>-1) || (ep_ini2<=480 && ep_ini2>-1));
 									if (!trobat){
 										var model="modelContainer defaultPopup";
 										var ep_start2=data.indexOf(model);
@@ -91,7 +91,8 @@ function edit2(){
 									pass_i++;
 								}
 								ep_ini=data.indexOf("class=\\\"number\\\">"+ep_ep);
-								trobat=(ep_ini<=230);
+								ep_ini2=data.indexOf("Episodio "+ep_ep);
+								trobat=((ep_ini<=480 && ep_ini>-1) || (ep_ini2<=480 && ep_ini2>-1));
 								if (trobat){
 									var ep_start3=data.indexOf("viewepisode");
 									data=data.substr(ep_start3+17,6);
@@ -471,7 +472,6 @@ function deleteByClass(nom,num){
         pareClass.removeChild(childClass);
     }
 }
-//--enllaç extern--//<i class="icon-external-link" style=" margin-left: 9px;" target="_blank" href="/links/viewepisode/id/236918"></i>
 edit2();
 function reload(){
 	try {
