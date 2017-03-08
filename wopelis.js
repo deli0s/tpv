@@ -104,45 +104,41 @@ function deleteScreener(){
     for (var i_link2=0; i_link2<size_link2; i_link2++){
         var child_link2=x_link2[i_link2];
         if (existeix(child_link2)){
-        	var quality=child_link2.getElementsByTagName('span')[0].innerHTML;
-        	if (quality.indexOf("Screener")===-1){
-        	    scr_non++;
-				var report_=child_link2.getElementsByTagName('span')[5];
-				if (existeix(report_)){
-					var report=Number(report_.innerHTML);
-					if (report>=2){
-						var pare_link2=child_link2;
-						pare_link2.innerHTML="<a style=' color: maroon; font-weight: bolder;' title='"+report+"'> Esborrat </a>";
-						i_link2--;
-					}else{
-						if (child_link2.getElementsByTagName("img")[1].src.indexOf("arg")>-1){
-							//var pare_lat=child_link2;
-							if ((scr_hide+scr_non)<size_link2){
-								//var cln_lat = pare_lat.cloneNode(true);
-								var cln_lat = child_link2.cloneNode(true);
-								cln_lat.className="link";
-								document.getElementById("folder_lat").appendChild(cln_lat);
-								lat++;
+			if (child_link2.getElementsByTagName('span').length===4){//Not downloads (length===5) 
+				if (child_link2.getElementsByTagName("img")[1].src.indexOf("arg")>-1){
+					if ((scr_hide+scr_non)<size_link2){
+						var cln_lat = child_link2.cloneNode(true);
+						cln_lat.className="link";
+						document.getElementById("folder_lat").appendChild(cln_lat);
+						lat++;
+					}
+					deleteMe(child_link2);
+					i_link2--;
+				}else{
+					var quality=child_link2.getElementsByTagName('span')[0].innerHTML;
+					if (quality.indexOf("Screener")===-1){
+						scr_non++;
+						var report_=child_link2.getElementsByTagName('span')[5];
+						if (existeix(report_)){
+							var report=Number(report_.innerHTML);
+							if (report>=2){
+								var pare_link2=child_link2;
+								pare_link2.innerHTML="<a style=' color: maroon; font-weight: bolder;' title='"+report+"'> Esborrat </a>";
+								i_link2--;
 							}
-							//pare_lat.innerHTML="";
-							deleteMe(child_link2);
-							i_link2--;
 						}
+					}else{
+						if ((scr_hide+scr_non)<size_link2){
+							var cln = child_link2.cloneNode(true);
+							cln.className="link";
+							document.getElementById("folder_scr").appendChild(cln);
+							scr_hide++;
+						}
+						deleteMe(child_link2);
+						i_link2--;
 					}
 				}
-        	}else{
-        	    //var pare_link3=child_link2;
-        	    if ((scr_hide+scr_non)<size_link2){
-        	        //var cln = pare_link3.cloneNode(true);
-        	        var cln = child_link2.cloneNode(true);
-                    cln.className="link";
-                    document.getElementById("folder_scr").appendChild(cln);
-                    scr_hide++;
-        	    }
-        		//pare_link3.innerHTML="";
-				deleteMe(child_link2);
-        		i_link2--;
-        	}
+			}
         }
     }
     if (scr_hide>0){//num hide
