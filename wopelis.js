@@ -14,6 +14,11 @@ function edit(){
 	if (window.location.href.indexOf("venlaces") > -1){
 		deleteScreener();
 		deleteUrlTester();
+		//Subir enlaces
+		var upload_=document.getElementsByTagName("form")[0];
+		if (existeix(upload_)){
+			upload_.style.float="right";
+		}
 		//title
 		var title_=document.getElementsByTagName("h1")[0];
 		if (existeix(title_)){
@@ -51,13 +56,14 @@ function deleteClickAds(){
 	};
 }
 
-function creaFolder(f,ttl,sub,f_txt){
+function creaFolder(f,ttl,sub,f_txt,ls_lk){
     if (document.getElementsByClassName(f).length<=0){
     	var folder=document.createElement("div");
         folder.className=f;
     	folder.style.border="1px solid #ccc";
     	folder.style.backgroundColor="#eee";
     	folder.style.marginTop="5px";
+    	folder.style.width="87%";
     	var folder_title=document.createElement("div");
         folder_title.id=ttl;
     	folder_title.style.padding="10px";
@@ -76,7 +82,6 @@ function creaFolder(f,ttl,sub,f_txt){
     	subFolder.style.paddingBottom="10px";
     	subFolder.style.paddingRight="10px";
         folder.appendChild(subFolder);
-    	var ls_lk=document.getElementsByTagName("h1")[1];
     	if (existeix(ls_lk)){
     	    ls_lk.appendChild(folder);
         	document.getElementById(ttl).onclick=function(){
@@ -91,13 +96,15 @@ function creaFolder(f,ttl,sub,f_txt){
 }
 
 function deleteScreener(){
-    creaFolder("folder","folder_title","folder_scr"," Screener (0)");
-    creaFolder("folder_lat","folder_title_lat","folder_lat"," LAT (0)");
+    creaFolder("folder","folder_title","folder_scr"," Screener (0)",document.getElementsByTagName("h1")[1]);
+    creaFolder("folder_lat","folder_title_lat","folder_lat"," LAT (0)",document.getElementsByTagName("h1")[1]);
+    creaFolder("folder_down","folder_title_down","folder_down"," Downloads (0)",document.getElementsByTagName("h1")[2]);
     
 	document.getElementsByTagName("h1")[1].style.marginTop="-50px";
 	
     var scr_hide=0,scr_non=0;
     var lat=0;
+    var down=0;
     
     var x_link2=document.getElementsByClassName("enlaces");
     var size_link2=x_link2.length;
@@ -138,6 +145,13 @@ function deleteScreener(){
 						i_link2--;
 					}
 				}
+			}else{
+				var cln_down = child_link2.cloneNode(true);
+				cln_down.className="link";
+				document.getElementById("folder_down").appendChild(cln_down);
+				down++;
+				deleteMe(child_link2);
+				i_link2--;
 			}
         }
     }
@@ -146,6 +160,9 @@ function deleteScreener(){
     }
     if (lat>0){
         document.getElementById("folder_title_lat").innerHTML=document.getElementById("folder_title_lat").innerHTML.replace("(0)","("+lat+")");
+    }
+    if (down>0){
+        document.getElementById("folder_title_down").innerHTML=document.getElementById("folder_title_down").innerHTML.replace("(0)","("+down+")");
     }
 }
 function deleteUrlTester(){
