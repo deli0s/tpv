@@ -102,7 +102,7 @@ function deleteScreener(){
     
 	var hh1=document.getElementsByTagName("h1")[1];
 	if (existeix(hh1)){
-            h11.style.marginTop="-50px";
+            hh1.style.marginTop="-50px";
 	}
 	
     var scr_hide=0,scr_non=0;
