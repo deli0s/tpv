@@ -100,7 +100,10 @@ function deleteScreener(){
     creaFolder("folder_lat","folder_title_lat","folder_lat"," LAT (0)",document.getElementsByTagName("h1")[1]);
     creaFolder("folder_down","folder_title_down","folder_down"," Downloads (0)",document.getElementsByTagName("h1")[2]);
     
-	document.getElementsByTagName("h1")[1].style.marginTop="-50px";
+	var hh1=document.getElementsByTagName("h1")[1];
+	if (existeix(hh1)){
+            h11.style.marginTop="-50px";
+	}
 	
     var scr_hide=0,scr_non=0;
     var lat=0;
