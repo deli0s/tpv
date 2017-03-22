@@ -50,5 +50,5 @@ function reload(){
         console.log("error");
     }
 }
-document.getElementsByTagName("body")[0].onclick=reload;
-document.getElementsByTagName("body")[0].addEventListener("wheel",reload);
+document.body.onclick=reload;
+document.body.addEventListener("wheel",reload);
