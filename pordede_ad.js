@@ -127,5 +127,5 @@ function deleteByClass(nom,num){
 }
 edit();
 function reload0(){edit();window.setTimeout(edit,1000);window.setTimeout(edit,2500);}
-document.getElementById("bodyId").onclick=reload0;
-document.getElementById("bodyId").addEventListener("wheel",reload0);
+document.body.onclick=reload0;
+document.body.addEventListener("wheel",reload0);
