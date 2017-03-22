@@ -481,5 +481,5 @@ function reload(){
         // error
     }
 }
-document.getElementById("bodyId").onclick=reload;
-document.getElementById("bodyId").addEventListener("wheel",reload);
+document.body.onclick=reload;
+document.body.addEventListener("wheel",reload);
