@@ -156,6 +156,11 @@ function deleteScreener(){
 				deleteMe(child_link2);
 				i_link2--;
 			}
+			if (child_link2.getElementsByTagName("a")[0].href.indexOf("streamango")>-1){
+				if (child_link2.getElementsByTagName("img")[0].src.indexOf("ntfof")>-1){
+					child_link2.getElementsByTagName("img")[0].src="https://streamango.com/assets/img/logo.png";
+				}
+			}
         }
     }
     if (scr_hide>0){//num hide
