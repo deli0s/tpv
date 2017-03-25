@@ -21,13 +21,16 @@ function edit(){
     	pare2.removeChild(child2);
     }
     //
-    var x2=document.getElementsByTagName("iframe");
-    var i2;
-    var size2=x2.length;
-    for (i2=0; i2 <size2; i2++){
-        var child2_2=x2[x2.length-1];
-    	var pare2_2=child2_2.parentNode;
-    	pare2_2.removeChild(child2_2);
+	var logIn_page_=document.getElementById("login-form");
+	if (!existeix(logIn_page_)){
+		var x2=document.getElementsByTagName("iframe");
+		var i2;
+		var size2=x2.length;
+		for (i2=0; i2 <size2; i2++){
+			var child2_2=x2[x2.length-1];
+			var pare2_2=child2_2.parentNode;
+			pare2_2.removeChild(child2_2);
+		}
     }
     //
     if ((window.location.href.indexOf("pordede.com/peli/") > -1) || (window.location.href.indexOf("pordede.com/serie/") > -1)){
