@@ -107,7 +107,7 @@ function edit2(){
 											}
 										}
 									}
-								}else console.log("ERROR: "+ep_text+", te mida: "+data.length);
+								}//else console.log("ERROR: "+ep_text+", te mida: "+data.length);
 							}
 						}
 					});
