@@ -1,11 +1,10 @@
 function linkAds(e){
-	return (e.indexOf("wabxsybclllz")>-1 || e.indexOf("woombaa")>-1 || e.indexOf("jettags")>-1);
+	return (e.indexOf("wabxsybclllz")>-1 || e.indexOf("woombaa")>-1 || e.indexOf("jettags")>-1 || e.indexOf("traffic")>-1 || e.indexOf("getmyads")>-1 || e.indexOf("mediawhirl")>-1 || e.indexOf("liveadexchanger")>-1 || e.indexOf("doubleclick")>-1);
 }
 
 function edit(){
 	deleteClickAds();
-    var bodyId=document.getElementById("bodyId");
-    if (bodyId!==null) bodyId.style.margin="0px";
+    document.body.style.margin="0px";
     deleteById("notifid");
     deleteById("advblock");
     deleteById("play_content");
@@ -13,20 +12,21 @@ function edit(){
     deleteById("trigger_id");
     //
     var x=document.getElementsByTagName("script");
-    var i;
     var size=x.length;
-    for (i=0; i <size; i++){
-        var child2=x[x.length-1];
-    	var pare2=child2.parentNode;
-    	pare2.removeChild(child2);
+    for (var i=0; i <size; i++){
+        var child2=x[i];
+		if (child2.src.indexOf("liveadexchanger") || child2.src.indexOf("doubleclick") || child2.src.indexOf("ads")){
+			var pare2=child2.parentNode;
+			pare2.removeChild(child2);
+			i--;
+		}
     }
     //
 	var logIn_page_=document.getElementById("login-form");
 	if (!existeix(logIn_page_)){
 		var x2=document.getElementsByTagName("iframe");
-		var i2;
 		var size2=x2.length;
-		for (i2=0; i2 <size2; i2++){
+		for (var i2=0; i2 <size2; i2++){
 			var child2_2=x2[x2.length-1];
 			var pare2_2=child2_2.parentNode;
 			pare2_2.removeChild(child2_2);
@@ -128,6 +128,31 @@ function deleteByClass(nom,num){
         pareClass.removeChild(childClass);
     }
 }
+function setCookie(cname, cvalue, exdays) {
+	var d = new Date();
+	d.setTime(d.getTime() + (exdays*24*60*60*1000));
+	var expires = "expires="+d.toUTCString();
+	document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+function getCookie(cname) {
+	var name = cname + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0; i<ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1);
+		if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+	}
+	return "";
+}
+
+jQuery(window).ready(function() {
+	 if (getCookie('adb')) {
+		setCookie('adb', false, 7);
+		if(navigator.cookieEnabled === true){
+			location.reload();
+		}
+	}
+});
 edit();
 function reload0(){edit();window.setTimeout(edit,1000);window.setTimeout(edit,2500);}
 document.body.onclick=reload0;
