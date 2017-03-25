@@ -146,11 +146,8 @@ function getCookie(cname) {
 }
 
 jQuery(window).ready(function() {
-	 if (getCookie('adb')) {
+	if (getCookie('adb')) {
 		setCookie('adb', false, 7);
-		if(navigator.cookieEnabled === true){
-			location.reload();
-		}
 	}
 });
 edit();
