@@ -15,10 +15,12 @@ function edit(){
     var size=x.length;
     for (var i=0; i <size; i++){
         var child2=x[i];
-		if (child2.src.indexOf("liveadexchanger") || child2.src.indexOf("doubleclick") || child2.src.indexOf("ads")){
-			var pare2=child2.parentNode;
-			pare2.removeChild(child2);
-			i--;
+		if (existeix(child2)){
+			if (child2.src.indexOf("liveadexchanger") || child2.src.indexOf("doubleclick") || child2.src.indexOf("ads")){
+				var pare2=child2.parentNode;
+				pare2.removeChild(child2);
+				i--;
+			}
 		}
     }
     //
@@ -37,14 +39,14 @@ function edit(){
         deleteByClass("ad boxed",0);
     	//
     	var llink=document.getElementsByClassName("info moreinfoLink")[0];
-		if (llink!==undefined && llink!==null){
+		if (existeix(llink)){
 			var link_cast0=llink.getElementsByTagName("a");
-			if (link_cast0!==undefined && link_cast0!==null){
+			if (existeix(link_cast0)){
 				var link_cast=link_cast0[0].href;
 				if (!link_cast.endsWith("tt_ql_1")){
 					document.getElementsByClassName("info moreinfoLink")[0].getElementsByTagName("a")[0].href=link_cast+"fullcredits?ref_=tt_ql_1";
 					var enlace=window.location.href;
-					if (enlace!==undefined && enlace!==null){
+					if (existeix(enlace)){
 						var nom_serie=enlace.replace("serie","peli");
 						var nom=nom_serie.replace("http://www.pordede.com/peli/","");
 						addF2(nom,llink);
@@ -70,7 +72,7 @@ function edit(){
     }
     if ((window.location.href.endsWith(".com/")) || (window.location.href.endsWith("index")) || (window.location.href.indexOf("index.php") > -1)){
         var today=document.getElementsByClassName("fc-today")[0];
-        if (today!==undefined && today!==null){
+        if (existeix(today)){
             today.style.color="beige";
             today.style.background="#4CAF50";
         }
