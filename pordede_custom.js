@@ -148,7 +148,7 @@ function edit2(){
 			var llink=document.getElementsByClassName("info moreinfoLink")[0];
 			if (llink!==undefined && llink!==null){
 			var enlace=window.location.href;
-				if (enlace!==undefined && enlace!==null){
+				if (existeix(enlace)){
 					var nom_serie=enlace.replace("serie","peli");
 					var nom=nom_serie.replace("http://www.pordede.com/peli/","");
 					addPirate2(nom,llink);
@@ -159,17 +159,24 @@ function edit2(){
     getLinks();
     deleteLinks();
 }//end edit2
-
+function existeix(nom){
+	return (nom!==undefined && nom!==null);
+}
 function borra(){//ja estan pendents o vistes
-    var all=document.getElementsByClassName("ddItemContainer modelContainer");
-    var size=all.length;var i=size-1;
+    var all_=document.getElementsByClassName("ddItemContainer modelContainer");
+    var size=all_.length;var i=size-1;
     while (i>=0){
-        var child5=all[i].getElementsByClassName("dropdownContainer desplegableAbstract done")[0].getElementsByTagName("span")[0];
-        if (!child5.children[0].classList.contains("icon-caret-down")){
-            var pare5=all[i].parentNode;
-    	    pare5.removeChild(all[i]);
-        }
-    	i--;
+        var child5_=all_[i].getElementsByClassName("dropdownContainer desplegableAbstract done")[0];
+		if (existeix(child5_)){
+			var child5=child5_.getElementsByTagName("span")[0];
+			if (existeix(child5)){
+				if (!child5.children[0].classList.contains("icon-caret-down")){
+					var pare5=all_[i].parentNode;
+					pare5.removeChild(all_[i]);
+				}
+				i--;
+			}
+		}
     }
 }
 function editData(nom,child_peli){
