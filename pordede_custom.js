@@ -410,7 +410,7 @@ function deleteLinks(){
 			var quality_=child_link2.getElementsByClassName("linkInfo quality")[0];
 			if (existeix(quality_)){
 				var quality=quality_.innerHTML.replace('<i class="icon-facetime-video"></i>','').replace(' ','');
-				if {(existeix(quality)){
+				if (existeix(quality)){
 					if (quality.indexOf("Screener")===-1){
 						scr_non++;
 						var nums=child_link2.getElementsByClassName("nums")[0].getElementsByTagName('span');
