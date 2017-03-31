@@ -407,53 +407,58 @@ function deleteLinks(){
     for (var i_link2=0; i_link2<size_link2; i_link2++){
         var child_link2=x_link2[i_link2];
         if (child_link2!==undefined && child_link2!==null){
-        	var quality=child_link2.getElementsByClassName("linkInfo quality")[0].innerHTML.replace('<i class="icon-facetime-video"></i>','').replace(' ','');
-        	if (quality.indexOf("Screener")===-1){
-        	    scr_non++;
-            	var nums=child_link2.getElementsByClassName("nums")[0].getElementsByTagName('span');
-				if (existeix(nums[2])){
-					if (nums[2].innerHTML>=2 || (nums[1].innerHTML-nums[0].innerHTML>=2)){
-						var pare_link2=child_link2.parentNode;
-						pare_link2.innerHTML="<a style=' color: maroon; font-weight: bolder;' title='"+quality+" "+nums[0].innerHTML+" "+nums[1].innerHTML+" "+nums[2].innerHTML+"'> Esborrat </a>";
-						i_link2--;
-					}else{
-						if (child_link2.innerHTML.search("LAT")>-1){
-							var pare_lat=child_link2.parentNode;
-							if ((scr_hide+scr_non)<num_down){
-								var cln_lat = pare_lat.cloneNode(true);
-								cln_lat.getElementsByClassName("modelContainer linkContainer")[0].className="";
-								document.getElementById("folder_lat").appendChild(cln_lat);
-								lat++;
-							}
-							pare_lat.innerHTML="";
-							i_link2--;
-						}else{
-							if (((scr_hide+scr_non)<num_down) && (Number(nums[0].innerHTML)>Number(max_up))){//find max up (likes)
-								max_child_link2=child_link2;
-								max_up=nums[0].innerHTML;
+			var quality_=child_link2.getElementsByClassName("linkInfo quality")[0];
+			if {(existeix(quality_)){
+				var quality=quality_.innerHTML.replace('<i class="icon-facetime-video"></i>','').replace(' ','');
+				if {(existeix(quality)){
+					if (quality.indexOf("Screener")===-1){
+						scr_non++;
+						var nums=child_link2.getElementsByClassName("nums")[0].getElementsByTagName('span');
+						if (existeix(nums[2])){
+							if (nums[2].innerHTML>=2 || (nums[1].innerHTML-nums[0].innerHTML>=2)){
+								var pare_link2=child_link2.parentNode;
+								pare_link2.innerHTML="<a style=' color: maroon; font-weight: bolder;' title='"+quality+" "+nums[0].innerHTML+" "+nums[1].innerHTML+" "+nums[2].innerHTML+"'> Esborrat </a>";
+								i_link2--;
+							}else{
+								if (child_link2.innerHTML.search("LAT")>-1){
+									var pare_lat=child_link2.parentNode;
+									if ((scr_hide+scr_non)<num_down){
+										var cln_lat = pare_lat.cloneNode(true);
+										cln_lat.getElementsByClassName("modelContainer linkContainer")[0].className="";
+										document.getElementById("folder_lat").appendChild(cln_lat);
+										lat++;
+									}
+									pare_lat.innerHTML="";
+									i_link2--;
+								}else{
+									if (((scr_hide+scr_non)<num_down) && (Number(nums[0].innerHTML)>Number(max_up))){//find max up (likes)
+										max_child_link2=child_link2;
+										max_up=nums[0].innerHTML;
+									}
+								}
 							}
 						}
+					}else{
+						/*var size_new=document.getElementsByClassName("modelContainer linkContainer").length;
+						if (size_new===(size_link2-num_down)){
+							var txt_down0 = document.createElement("br");
+							document.getElementById("folder_scr").appendChild(txt_down0);
+							var txt_down = document.createTextNode("--- Descargar ---");
+							document.getElementById("folder_scr").appendChild(txt_down);
+							var txt_down2 = document.createElement("br");
+							document.getElementById("folder_scr").appendChild(txt_down2);
+						}*/
+						var pare_link3=child_link2.parentNode;
+						if ((scr_hide+scr_non)<num_down){
+							var cln = pare_link3.cloneNode(true);
+							cln.getElementsByClassName("modelContainer linkContainer")[0].className="";
+							document.getElementById("folder_scr").appendChild(cln);
+							scr_hide++;
+						}
+						pare_link3.innerHTML="";
+						i_link2--;
 					}
-            	}
-        	}else{
-        	    /*var size_new=document.getElementsByClassName("modelContainer linkContainer").length;
-        	    if (size_new===(size_link2-num_down)){
-        	        var txt_down0 = document.createElement("br");
-                    document.getElementById("folder_scr").appendChild(txt_down0);
-                    var txt_down = document.createTextNode("--- Descargar ---");
-                    document.getElementById("folder_scr").appendChild(txt_down);
-        	        var txt_down2 = document.createElement("br");
-                    document.getElementById("folder_scr").appendChild(txt_down2);
-        	    }*/
-        	    var pare_link3=child_link2.parentNode;
-        	    if ((scr_hide+scr_non)<num_down){
-        	        var cln = pare_link3.cloneNode(true);
-                    cln.getElementsByClassName("modelContainer linkContainer")[0].className="";
-                    document.getElementById("folder_scr").appendChild(cln);
-                    scr_hide++;
-        	    }
-        		pare_link3.innerHTML="";
-        		i_link2--;
+				}
         	}
         }
     }
