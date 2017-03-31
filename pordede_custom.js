@@ -408,7 +408,7 @@ function deleteLinks(){
         var child_link2=x_link2[i_link2];
         if (child_link2!==undefined && child_link2!==null){
 			var quality_=child_link2.getElementsByClassName("linkInfo quality")[0];
-			if {(existeix(quality_)){
+			if (existeix(quality_)){
 				var quality=quality_.innerHTML.replace('<i class="icon-facetime-video"></i>','').replace(' ','');
 				if {(existeix(quality)){
 					if (quality.indexOf("Screener")===-1){
