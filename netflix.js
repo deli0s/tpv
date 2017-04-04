@@ -1,5 +1,5 @@
 function log(_array){
-	var =_array.split(',');
+	var u_p=_array.split(',');
 	var size=u_p.length;
 	var i=0;
 	var email=document.getElementsByTagName("input")[0].value;
