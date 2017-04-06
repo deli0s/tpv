@@ -1,8 +1,13 @@
 var thepiratebay="https://thepiratebay.cr/search/";
 function edit(){
-	var sched_1=document.getElementById("sched_1");
-	if (existeix(sched_1)){
-		var dds=sched_1.getElementsByTagName("dd");
+	sched_link("sched_0");
+	sched_link("sched_1");
+	sched_link("sched_2");
+}
+function sched_link(sched_){
+	var sched=document.getElementById(sched_);
+	if (existeix(sched)){
+		var dds=sched.getElementsByTagName("dd");
 		var size_dd=dds.length;
 		for (var i_dd=0; i_dd<size_dd; i_dd++){
 			var dd=dds[i_dd];
@@ -37,7 +42,8 @@ function addPirate(nom,child){
 	a_Pirate.appendChild(img_P);
 	a_Pirate.style.cursor="pointer";
 	a_Pirate.setAttribute('href',thepiratebay+nom.replace(/-/g,"%20"));
-	child.appendChild(a_Pirate);
+	child.insertBefore(a_Pirate,child.lastChild);
+	//child.appendChild(a_Pirate);
 }
 function existeix(nom){
 	return (nom!==undefined && nom!==null);
