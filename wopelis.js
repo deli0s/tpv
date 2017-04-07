@@ -26,8 +26,8 @@ function edit(){
 		}
 		//no redir
 		var online_=document.getElementsByTagName("h1")[2];
-		if (online_.innerHTML.indexOf("Online")>-1){
-			if (existeix(online_)){
+		if (existeix(online_)){
+			if (online_.innerHTML.indexOf("Online")>-1){
 				online_.style.marginTop="-50px";
 			}
 		}
