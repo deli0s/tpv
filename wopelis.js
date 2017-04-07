@@ -24,8 +24,27 @@ function edit(){
 		if (existeix(title_)){
 			document.title=title_.innerHTML.replace("Viendo enlaces de: ","");
 		}
+		//no redir
+		var online_=document.getElementsByTagName("h1")[2];
+		if (online_.innerHTML.indexOf("Online")>-1){
+			if (existeix(online_)){
+				online_.style.marginTop="-50px";
+			}
+		}
+		var title2_=document.getElementsByTagName("h1")[1];
+		if (existeix(title2_)){
+			if (title2_.innerHTML.indexOf("visita")>-1){
+				deleteMe(title2_);
+			}
+		}
+		
 	}
 }//end edit
+
+//no redir
+function redir(enlace, id, t){
+	window.open(enlace, '_blank');
+}
 
 function deleteScriptAds(){
     var x_script=document.getElementsByTagName("script");
