@@ -76,6 +76,13 @@ function edit(){
             today.style.color="beige";
             today.style.background="#4CAF50";
         }
+        var header_c=document.getElementsByClassName("fc-header-center")[0];
+        if (existeix(header_c)){
+			var header_i=header_c.getElementsByTagName("a")[0];
+			if (!existeix(header_i)){
+				addLinkCalendar();
+			}
+		}
     }
 }//end edit
 function addF2(nom,llink){
@@ -92,6 +99,27 @@ function addF2(nom,llink){
 	img_FA.src="http://www.filmaffinity.com/favicon.png";
 	img_FA.style.width="23px";
 	a_FA.insertBefore(img_FA,a_FA.childNodes[0]);
+}
+function addLinkCalendar(){
+	var ul_link=document.createElement("ul");
+	var li_link=document.createElement("li");
+	var a_link=document.createElement("a");
+	var a_i_link=document.createElement("i");
+	ul_link.className="configMenu";
+	li_link.className="singleLink";
+	a_link.className="defaultLink box activated";
+	a_i_link.className="icon icon-calendar";
+	a_link.appendChild(a_i_link);
+	a_link.setAttribute('href',"/main/calendario");
+	a_link.style.padding="0px";
+	a_link.style.border="0px";
+	a_link.style.fontSize="1em";
+	li_link.appendChild(a_link);
+	ul_link.appendChild(li_link);
+	var header_c=document.getElementsByClassName("fc-header-center")[0];
+	if (existeix(header_c)){
+		header_c.appendChild(ul_link);
+	}
 }
 function deleteClickAds(){
 	window.onmouseover=function(e) {
