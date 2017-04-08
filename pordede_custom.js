@@ -264,7 +264,7 @@ function addIMDB(enlace,child_peli){
 	var nom=enlace.replace("http://www.pordede.com","");
 	$.get(nom, function( data ){
 		var imdb_link=(data.match(/www.imdb.{22}/));
-		if (imdb_link!==undefined && imdb_link!==null){
+		if (existeix(imdb_link)){
 			a_IMDB.setAttribute('href',"http://www.imdb.com/title/"+imdb_link[0].slice(imdb_link[0].length-9,imdb_link[0].length)+"/fullcredits?ref_=tt_ql_1");
 		}
 	});
