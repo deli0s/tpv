@@ -324,9 +324,9 @@ function getLinks(){
     	if (document.getElementsByClassName("linky-winky").length<size_peli){
         	for (var i_peli=0; i_peli<size_peli; i_peli++){
         		var child_peli=x_peli[i_peli];
-        		if (child_peli!==undefined && child_peli!==null){
+				if (existeix(child_peli)){
             		var subenlace=child_peli.getElementsByClassName("defaultLink extended")[0];
-            		if (subenlace!==undefined && subenlace!==null){
+					if (existeix(subenlace)){
             			var enlace=subenlace.href;
             			if (enlace.indexOf("http://www.pordede.com/peli/")>-1){
                             var nom=enlace.replace("http://www.pordede.com/peli/","");
