@@ -95,7 +95,6 @@ function addLinks(link_name,child_peli){
 	var a_link=document.createElement("a");
 	a_link.innerHTML="🔗";
 	a_link.setAttribute('href',link_name);
-	a_link.setAttribute('class','linkly_wobbly');
 	a_link.setAttribute('target','_blank');
 	a_link.style.right="138px";
 	a_link.style.borderRadius="7px";
@@ -158,6 +157,7 @@ function addIMDB(nom,child_peli){
 	img_IMDB.style.width="19px";
 	img_IMDB.style.textDecoration="none";
 	a_IMDB.appendChild(img_IMDB);
+	a_IMDB.setAttribute('class','linkly_wobbly');
 	a_IMDB.setAttribute('target','_blank');
 	a_IMDB.style.position="absolute";
 	a_IMDB.style.textDecoration="none";
@@ -196,7 +196,6 @@ function getLinks(){
 							var link_name='/venlaces.php?npl='+id_;
 							addLinks(link_name,child_peli);
 							addIMDB(nom,child_peli);
-							//addIMDB(enlace,child_peli);
 							addFilmaffinity(nom,child_peli);
 							//addPirate(nom,child_peli);
 							goodLinks(link_name,child_peli);
@@ -205,24 +204,33 @@ function getLinks(){
 				}
 			}
     	}
+		var series_=document.getElementsByClassName("listContainer listCovers inline")[0];
+		if (existeix(series_)){
+			var x_series=series_.getElementsByClassName("ddItemContainer modelContainer");
+			var size_series=x_series.length;
+			if (document.getElementsByClassName("linkly_wobbly").length<size_series){
+				for (var i_serie=0; i_serie<size_series; i_serie++){
+					var child_serie=x_series[i_serie];
+					if (existeix(child_serie)){
+						var subenlace=child_serie.getElementsByClassName("extended")[0];
+						if (existeix(subenlace)){
+							var nom=subenlace.getElementsByClassName("title")[0].innerHTML;
+							addIMDB(nom,child_serie);
+							addFilmaffinity(nom,child_serie);
+						}
+					}
+				}
+			}
+    	}
     }
 }
 function goodLinks(link_name,child_peli){
-$.get(link_name, function(data){
-//start html link
-/*
-var result=data.match(/video.{0,200}(Rip|Hd).{0,200}headphones/i);
-if (/(youtube|LAT)/.test(result)){
-*/
-if (data.search(/hosts(.|\n){0,100}(Rip|Hd|720|1080)/i)===-1){
-	child_peli.style.opacity="0.5";
-}/*
-if (data.search(/video.{0,200}(Rip|Hd).{0,200}headphones/i)===-1){
-	child_peli.style.opacity="0.5";
-}*/
-//end html link
-});}
-
+	$.get(link_name, function(data){
+		if (data.search(/hosts(.|\n){0,100}(Rip|Hd|720|1080)/i)===-1){
+			child_peli.style.opacity="0.5";
+		}
+	});
+}
 function deleteScriptAds(){
     var x_script=document.getElementsByTagName("script");
     var size_script=x_script.length;
