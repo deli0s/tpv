@@ -179,7 +179,7 @@ function borra(){//ja estan pendents o vistes
 		}
     }
 }
-function editData(nom,child_peli){
+function goodLinks(nom,child_peli){
 $.get("/links/view/slug/"+nom+"/what/peli", function(data){
 //start html link
 /*
@@ -335,7 +335,7 @@ function getLinks(){
         					addIMDB(enlace,child_peli);
         					addFilmaffinity(nom,child_peli);
         					addPirate(nom,child_peli);
-                			editData(nom,child_peli);
+                			goodLinks(nom,child_peli);
                 		}
             		}
         		}
