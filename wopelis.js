@@ -170,7 +170,7 @@ $.get(link_name, function(data){
 var result=data.match(/video.{0,200}(Rip|Hd).{0,200}headphones/i);
 if (/(youtube|LAT)/.test(result)){
 */
-if (data.search(/hosts.{0,200}(Rip|Hd|HDRip|HD1080).{0,200}images/i)===-1){
+if (data.search(/(Rip|Hd|HDRip|HD1080)/i)===-1){
 	child_peli.style.opacity="0.5";
 }/*
 if (data.search(/video.{0,200}(Rip|Hd).{0,200}headphones/i)===-1){
