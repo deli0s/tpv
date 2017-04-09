@@ -153,12 +153,13 @@ function addFilmaffinity(nom,child_peli,absolute){
 	var a_FA=document.createElement("a");
 	var img_FA=document.createElement("img");
 	img_FA.src="http://www.filmaffinity.com/favicon.png";
-	img_FA.style.width="19px";
 	img_FA.style.textDecoration="none";
 	if (absolute){
 		a_FA.style.position="absolute";
+		img_FA.style.width="19px";
 	}else{
 		a_FA.style.marginLeft="18px";
+		img_FA.style.width="24px";
 	}
 	a_FA.style.textDecoration="none";
 	a_FA.style.padding="0";
@@ -176,15 +177,16 @@ function addIMDB(nom,child_peli,absolute){
 	var a_IMDB=document.createElement("a");
 	var img_IMDB=document.createElement("img");
 	img_IMDB.src="http://ia.media-imdb.com/images/G/01/imdb/images/logos/imdb_fb_logo-1730868325._CB522736557_.png";
-	img_IMDB.style.width="19px";
 	img_IMDB.style.textDecoration="none";
 	a_IMDB.appendChild(img_IMDB);
 	a_IMDB.setAttribute('class','linkly_wobbly');
 	a_IMDB.setAttribute('target','_blank');
 	if (absolute){
 		a_IMDB.style.position="absolute";
+		img_IMDB.style.width="19px";
 	}else{
 		a_IMDB.style.marginLeft="9px";
+		img_IMDB.style.width="24px";
 	}
 	a_IMDB.style.textDecoration="none";
 	a_IMDB.style.padding="0";
