@@ -9,6 +9,7 @@ function edit(){
 	deleteScriptAds();
 	getLinks();
 	reSize();
+	addLinks2();
 	//CSS
 	var sheet = window.document.styleSheets[0];
 	sheet.insertRule('button:hover,input[type=submit]:hover,.dropdownContainer.blue:hover{background:#0a5bc2;}', sheet.cssRules.length);
@@ -44,9 +45,26 @@ function edit(){
 	}
 }//end edit
 
-//no redir
-function redir(enlace, id, t){
+function redir(enlace, id, t){//no redir
 	window.open(enlace, '_blank');
+}
+function addLinks2(){
+	if (window.location.href.indexOf("peli.php")>-1 || window.location.href.indexOf("serie.php")>-1){
+		if (document.getElementsByClassName("linkly_wobbly").length===0){
+			var h1_title=document.getElementsByTagName("h1")[0];
+			if (existeix(h1_title)){
+				var h1_inner=h1_title.innerHTML;//nom (title)
+				if (h1_inner.indexOf("<br>")>-1){
+					h1_inner.replace("<br>","");
+				}
+				var h2_go_to=document.getElementsByTagName("h2")[0];
+				if (existeix(h2_go_to)){
+					addIMDB(h1_inner,h2_go_to,false);
+					addFilmaffinity(h1_inner,h2_go_to,false);
+				}
+			}
+		}
+	}
 }
 function reSize(){
 	if (window.location.href.indexOf("acc.php")>-1){//user
@@ -131,13 +149,17 @@ function addPirate(nom,child_peli){
 	a_Pirate.setAttribute('href',thepiratebay+nom.replace(/-/g,"%20"));
 	child_peli.appendChild(a_Pirate);
 }
-function addFilmaffinity(nom,child_peli){
+function addFilmaffinity(nom,child_peli,absolute){
 	var a_FA=document.createElement("a");
 	var img_FA=document.createElement("img");
 	img_FA.src="http://www.filmaffinity.com/favicon.png";
 	img_FA.style.width="19px";
 	img_FA.style.textDecoration="none";
-	a_FA.style.position="absolute";
+	if (absolute){
+		a_FA.style.position="absolute";
+	}else{
+		a_FA.style.marginLeft="18px";
+	}
 	a_FA.style.textDecoration="none";
 	a_FA.style.padding="0";
 	a_FA.style.zIndex="1";
@@ -150,7 +172,7 @@ function addFilmaffinity(nom,child_peli){
 	a_FA.setAttribute('href',"http://www.filmaffinity.com/es/search.php?stext="+nom.replace(/-/g,"+")+"&stype=title");
 	child_peli.appendChild(a_FA);
 }
-function addIMDB(nom,child_peli){
+function addIMDB(nom,child_peli,absolute){
 	var a_IMDB=document.createElement("a");
 	var img_IMDB=document.createElement("img");
 	img_IMDB.src="http://ia.media-imdb.com/images/G/01/imdb/images/logos/imdb_fb_logo-1730868325._CB522736557_.png";
@@ -159,7 +181,11 @@ function addIMDB(nom,child_peli){
 	a_IMDB.appendChild(img_IMDB);
 	a_IMDB.setAttribute('class','linkly_wobbly');
 	a_IMDB.setAttribute('target','_blank');
-	a_IMDB.style.position="absolute";
+	if (absolute){
+		a_IMDB.style.position="absolute";
+	}else{
+		a_IMDB.style.marginLeft="9px";
+	}
 	a_IMDB.style.textDecoration="none";
 	a_IMDB.style.padding="0";
 	a_IMDB.style.zIndex="1";
@@ -195,8 +221,8 @@ function getLinks(){
 							var nom=subenlace.getElementsByClassName("title")[0].innerHTML;
 							var link_name='/venlaces.php?npl='+id_;
 							addLinks(link_name,child_peli);
-							addIMDB(nom,child_peli);
-							addFilmaffinity(nom,child_peli);
+							addIMDB(nom,child_peli,true);
+							addFilmaffinity(nom,child_peli,true);
 							//addPirate(nom,child_peli);
 							goodLinks(link_name,child_peli);
 						}
@@ -215,8 +241,8 @@ function getLinks(){
 						var subenlace=child_serie.getElementsByClassName("extended")[0];
 						if (existeix(subenlace)){
 							var nom=subenlace.getElementsByClassName("title")[0].innerHTML;
-							addIMDB(nom,child_serie);
-							addFilmaffinity(nom,child_serie);
+							addIMDB(nom,child_serie,true);
+							addFilmaffinity(nom,child_serie,true);
 						}
 					}
 				}
