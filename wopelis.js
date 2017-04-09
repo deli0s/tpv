@@ -55,7 +55,7 @@ function addLinks2(){
 			if (existeix(h1_title)){
 				var h1_inner=h1_title.innerHTML;//nom (title)
 				if (h1_inner.indexOf("<br>")>-1){
-					h1_inner.replace("<br>","");
+					h1_inner=h1_inner.replace("<br>","");
 				}
 				var h2_go_to=document.getElementsByTagName("h2")[0];
 				if (existeix(h2_go_to)){
