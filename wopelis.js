@@ -512,12 +512,9 @@ function partition(array, pivot, left, right){
 	var storeIndex = left,
 			pivotYear = array.getElementsByClassName("ddItemContainer modelContainer")[pivot].getElementsByClassName("year")[0].innerHTML;
 	swap(array, pivot, right);
-	pivotOpacity=1-Number(array.getElementsByClassName("ddItemContainer modelContainer")[pivot].style.opacity);
 	for (var v = left; v < right; v++){
-		var opacity=1-Number(array.getElementsByClassName("ddItemContainer modelContainer")[v].style.opacity);
 		var year=array.getElementsByClassName("ddItemContainer modelContainer")[v].getElementsByClassName("year")[0].innerHTML;
-		if (opacity < pivotOpacity){
-		//if ((opacity === 1) || ((opacity === pivotOpacity) && (year < pivotYear))){
+		if (year < pivotYear){
 			swap(array, v, storeIndex);
 			storeIndex++;
 		}
@@ -525,7 +522,7 @@ function partition(array, pivot, left, right){
 	swap(array, right, storeIndex);
 	return storeIndex;
 }
-function sort_year_quality(array, left, right){
+function sort_year(array, left, right){
 	var pivot = null,newPivot = null;
 	if (typeof left !== 'number'){
 		left = 0;
@@ -536,8 +533,8 @@ function sort_year_quality(array, left, right){
 	if (left < right){
 		pivot		= left + Math.ceil((right - left) * 0.5);
 		newPivot	= partition(array, pivot, left, right);
-		sort_year_quality(array, left, newPivot - 1);
-		sort_year_quality(array, newPivot + 1, right);
+		sort_year(array, left, newPivot - 1);
+		sort_year(array, newPivot + 1, right);
 	}
 }
 function reSort(){
@@ -547,7 +544,17 @@ function reSort(){
 		if (existeix(x_pelis)){
 			var size_peli=x_pelis.length;
 			if (document.getElementsByClassName("opacity").length===size_peli){
-				setTimeout(function(){ sort_year_quality(pelis_,0,size_peli-1); }, 500);
+				var i_opacity=0;
+				for (var i_peli=0; i_peli<size_peli; i_peli++){
+					var child_peli=x_pelis[i_peli];
+					if (existeix(child_peli)){
+						if (child_peli.style.opacity==1){
+							swap(pelis_,i_opacity,i_peli);
+							i_opacity++;
+						}
+					}
+				}
+				setTimeout(function(){ sort_year(pelis_,i_opacity,size_peli-1); }, 500);
 				setTimeout(function(){ deleteById("loding_circle"); }, 1000);
 			}
 		}
