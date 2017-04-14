@@ -421,14 +421,6 @@ function deleteScreener(){
         document.getElementById("folder_title_down").innerHTML=document.getElementById("folder_title_down").innerHTML.replace("(0)","("+down+")");
     }
 }
-/*function deleteUrlTester(){
-	var urlTester=document.getElementsByTagName("a")[6];
-	if (existeix(urlTester)){
-		if (urlTester.innerHTML.indexOf("urltester")>-1){
-			deleteMe(urlTester.parentNode);
-		}
-	}
-}*/
 function deleteById(nom){
 	var childAdv=document.getElementById(nom);
 	if (existeix(childAdv)){
