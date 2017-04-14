@@ -554,6 +554,7 @@ function reSort(){
 						}
 					}
 				}
+				sort_year(pelis_,0,i_opacity-1);
 				setTimeout(function(){ sort_year(pelis_,i_opacity,size_peli-1); }, 500);
 				setTimeout(function(){ deleteById("loding_circle"); }, 1000);
 			}
