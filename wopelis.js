@@ -174,7 +174,7 @@ function addFilmaffinity(nom,child_peli,absolute){
 function addIMDB(nom,child_peli,absolute){
 	var a_IMDB=document.createElement("a");
 	var img_IMDB=document.createElement("img");
-	img_IMDB.src="http://ia.media-imdb.com/images/G/01/imdb/images/favicon-2165806970._CB522736556_.ico";
+	img_IMDB.src="http://ia.media-imdb.com/images/G/01/imdb/images/logos/imdb_fb_logo-1730868325._CB522736557_.png";
 	img_IMDB.style.textDecoration="none";
 	a_IMDB.appendChild(img_IMDB);
 	a_IMDB.setAttribute('class','linkly_wobbly');
