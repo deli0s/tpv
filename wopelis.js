@@ -16,7 +16,6 @@ function edit(){
 	//
 	if (window.location.href.indexOf("venlaces") > -1){
 		deleteScreener();
-		deleteUrlTester();
 		//Subir enlaces
 		var upload_=document.getElementsByTagName("form")[0];
 		if (existeix(upload_)){
