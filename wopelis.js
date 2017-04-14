@@ -9,6 +9,12 @@ function edit(){
 	getLinks();
 	reSize();
 	addLinks2();
+	var button_=document.getElementsByTagName("button")[0];
+	if (existeix(button_)){
+		if (button_.innerHTML==="Acepto y quiero entrar"){
+			button_.click();
+		}
+	}
 	//CSS
 	var sheet = window.document.styleSheets[0];
 	sheet.insertRule('button:hover,input[type=submit]:hover,.dropdownContainer.blue:hover{background:#0a5bc2;}', sheet.cssRules.length);
@@ -221,14 +227,15 @@ function getLinks(){
 							var nom=subenlace.getElementsByClassName("title")[0].innerHTML;
 							var link_name='/venlaces.php?npl='+id_;
 							addLinks(link_name,child_peli);
+							reAge(enlace,child_peli);
 							goodLinks(link_name,child_peli);
 							addIMDB(nom,child_peli,true);
 							addFilmaffinity(nom,child_peli,true);
 							//addPirate(nom,child_peli);
-							reAge(enlace,child_peli);
 						}
 					}
 				}
+				reSort();
 			}
     	}
 		var series_=document.getElementsByClassName("listContainer listCovers inline")[0];
@@ -252,36 +259,76 @@ function getLinks(){
     }
 }
 function reAge(enlace,child_peli){
-	$.get(enlace, function(data){
-		var year=null;
-		var matched=String(data.match(/año(.|\n){0,20}info(.|\n){0,3}[0-9]{4}/i));
-		if (existeix(matched)){
-			var nan=Number(matched.match(/[0-9]{4}/));
-			if (nan===0 || isNaN(nan)){
-				year=3000;
-				//year=0;
-			}else{
-				year=nan;
-			}
+	var old_L=enlace.length;
+	var index_L=enlace.indexOf("id=");
+	var id_2=enlace.substr(index_L+3,old_L-index_L-3);
+	var kookie_y=id_2+"_year";
+	var kookie_year=getCookie(kookie_y);
+	if (kookie_year){
+		var child_year=child_peli.getElementsByClassName("year")[0];
+		if (existeix(child_year)){
+			child_year.innerHTML=kookie_year;
 		}
-		if (existeix(year)){
+	}else{
+		$.get(enlace, function(data){
+			var year=null;
+			var matched=String(data.match(/año(.|\n){0,30}info(.|\n){0,3}[0-9]{4}/i));
+			if (existeix(matched)){
+				var nan=Number(matched.match(/[0-9]{4}/));
+				if (nan===0 || isNaN(nan)){
+					year=3000;
+				}else{
+					year=nan;
+				}
+			}
 			var child_year=child_peli.getElementsByClassName("year")[0];
 			if (existeix(child_year)){
-				child_year.innerHTML=year;
+				if (existeix(year)){
+					child_year.innerHTML=year;
+					setCookie(kookie_y,year,2);//2 days
+				}
 			}
-		}
-	});
+		});
+	}
 }
 function goodLinks(link_name,child_peli){
-	$.get(link_name, function(data){
-		if (data.search(/hosts(.|\n){0,100}(Rip|Hd|720|1080)/i)===-1){
+	var year=null;
+	var kookie_y=id_2+"_year";
+	var kookie_year=getCookie(kookie_y);
+	if (kookie_year){
+		year=kookie_year;
+	}else{
+		var child_year=child_peli.getElementsByClassName("year")[0];
+		if (existeix(child_year)){
+			year=child_year.innerHTML;
+		}
+	}
+	if (existeix(year)){
+		var today = new Date();
+		var today_year = today.getFullYear();
+		if (year<=today_year){
+			var id_2=link_name.replace("/venlaces.php?npl=","");
+			var kookie_o=id_2+"_opacity";
+			var kookie_opacity=getCookie(kookie_o);
+			if (kookie_opacity){
+				child_peli.style.opacity=kookie_opacity;
+			}else{
+				$.get(link_name, function(data){
+					if (data.search(/hosts(.|\n){0,100}(Rip|Hd|720|1080)/i)===-1){
+						child_peli.style.opacity="0.5";
+						setCookie(kookie_o,0.5,7/24);//7 h
+					}else{
+						child_peli.style.opacity="1";
+						setCookie(kookie_o,1,2);//2 days
+					}
+				});
+			}
+		}else{
 			child_peli.style.opacity="0.5";
 		}
 		child_peli.className+=" opacity";
-	});
+	}
 	addSpinCircle(document.getElementsByClassName("inline-subtitle")[1]);
-	setTimeout(function(){ addLoadingSort(); }, 3000);
-	setTimeout(function(){ deleteById("loding_circle"); }, 3001);
 }
 function deleteScriptAds(){
     var x_script=document.getElementsByTagName("script");
@@ -463,12 +510,14 @@ function swap(array, indexA, indexB){
 }
 function partition(array, pivot, left, right){
 	var storeIndex = left,
-			pivotValue = array.getElementsByClassName("ddItemContainer modelContainer")[pivot].getElementsByClassName("year")[0].innerHTML;
+			pivotYear = array.getElementsByClassName("ddItemContainer modelContainer")[pivot].getElementsByClassName("year")[0].innerHTML;
 	swap(array, pivot, right);
 	pivotOpacity=1-Number(array.getElementsByClassName("ddItemContainer modelContainer")[pivot].style.opacity);
 	for (var v = left; v < right; v++){
 		var opacity=1-Number(array.getElementsByClassName("ddItemContainer modelContainer")[v].style.opacity);
-		if ((opacity === 1) || ((opacity === pivotOpacity) && (array.getElementsByClassName("ddItemContainer modelContainer")[v].getElementsByClassName("year")[0].innerHTML < pivotValue))){
+		var year=array.getElementsByClassName("ddItemContainer modelContainer")[v].getElementsByClassName("year")[0].innerHTML;
+		if (opacity < pivotOpacity){
+		//if ((opacity === 1) || ((opacity === pivotOpacity) && (year < pivotYear))){
 			swap(array, v, storeIndex);
 			storeIndex++;
 		}
@@ -497,7 +546,10 @@ function reSort(){
 		var x_pelis=pelis_.getElementsByClassName("ddItemContainer modelContainer");
 		if (existeix(x_pelis)){
 			var size_peli=x_pelis.length;
-			sort_year_quality(pelis_,0,size_peli-1);
+			if (document.getElementsByClassName("opacity").length===size_peli){
+				setTimeout(function(){ sort_year_quality(pelis_,0,size_peli-1); }, 500);
+				setTimeout(function(){ deleteById("loding_circle"); }, 1000);
+			}
 		}
 	}
 }
@@ -523,21 +575,25 @@ function addSpinCircle(child){
 		}
 	}
 }
-function addLoadingSort(){
-	var pelis_=document.getElementsByClassName("listContainer listCovers inline")[1];
-	if (existeix(pelis_)){
-		var x_pelis=pelis_.getElementsByClassName("ddItemContainer modelContainer");
-		if (existeix(x_pelis)){
-			var size_peli=x_pelis.length;
-			var subtitle=document.getElementsByClassName("inline-subtitle")[1];
-			if (existeix(subtitle)){
-				if (document.getElementsByClassName("opacity").length===size_peli){
-					sort_year_quality(pelis_,0,size_peli-1);
-				}
-			}
-		}
-	}
+function setCookie(cname, cvalue, exdays) {
+	var d = new Date();
+	d.setTime(d.getTime() + (exdays*24*60*60*1000));
+	var expires = "expires="+d.toUTCString();
+	document.cookie = cname + "=" + cvalue + "; " + expires;
 }
+function getCookie(cname) {
+	var name = cname + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0; i<ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1);
+		if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+	}
+	return "";
+}
+$( document ).ajaxComplete(function( event, request, settings ){
+	reSort();
+});
 edit();
 function reload(){
 	try {
