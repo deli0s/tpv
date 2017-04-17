@@ -6,15 +6,21 @@ function linkAds(e){
 function edit(){
 	deleteClickAds();
 	deleteScriptAds();
-	getLinks();
-	reSize();
-	addLinks2();
 	var button_=document.getElementsByTagName("button")[0];
 	if (existeix(button_)){
 		if (button_.innerHTML==="Acepto y quiero entrar"){
 			button_.click();
 		}
+	}else{
+		if (window.location.href.indexOf("acc.php")>-1){//user
+			$( document ).ajaxComplete(function( event, request, settings ){
+				reSort();
+			});
+			getLinks();
+			reSize();
+		}
 	}
+	addLinks2();
 	//CSS
 	var sheet = window.document.styleSheets[0];
 	sheet.insertRule('button:hover,input[type=submit]:hover,.dropdownContainer.blue:hover{background:#0a5bc2;}', sheet.cssRules.length);
@@ -71,46 +77,44 @@ function addLinks2(){
 	}
 }
 function reSize(){
-	if (window.location.href.indexOf("acc.php")>-1){//user
-		var side=document.getElementsByClassName("sidebar")[0];
-		if (existeix(side)){
-			side.style.width="9.666%";
-		}
-		var main=document.getElementsByClassName("main")[0];
-		if (existeix(main)){
-			main.style.width="84.333%";
-		}
-		var list0=document.getElementsByClassName("listContainer listCovers inline")[0];
-		if (existeix(list0)){
-			list0.style.minHeight="1000px";
-			list0.style.width="48.958%";
-			list0.style.float="left";
-			list0.style.marginRight="7px";
-		}
-		var list1=document.getElementsByClassName("listContainer listCovers inline")[1];
-		if (existeix(list1)){
-			list1.style.minHeight="1000px";
-			list1.style.width="48.958%";
-			list1.style.marginTop="-20px";
-		}
-		var subsectionBig=document.getElementsByClassName("subsection subsectionBig")[0];
-		if (existeix(subsectionBig)){
-			subsectionBig.style.width="101%";
-		}
-		var subtitle=document.getElementsByClassName("inline-subtitle")[1];
-		if (existeix(subtitle)){
-			subtitle.style.marginTop="-49px";
-			subtitle.style.float="left";
-		}
-		var subtitle2=document.getElementsByClassName("inline-subtitle")[2];
-		if (existeix(subtitle2)){
-			subtitle2.style.marginTop="15px";
-			subtitle2.style.borderTop="1px solid #999";
-		}
-		var hr=document.getElementsByTagName("hr")[0];
-		if (existeix(hr)){
-			deleteMe(hr);
-		}
+	var side=document.getElementsByClassName("sidebar")[0];
+	if (existeix(side)){
+		side.style.width="9.666%";
+	}
+	var main=document.getElementsByClassName("main")[0];
+	if (existeix(main)){
+		main.style.width="84.333%";
+	}
+	var list0=document.getElementsByClassName("listContainer listCovers inline")[0];
+	if (existeix(list0)){
+		list0.style.minHeight="1000px";
+		list0.style.width="48.958%";
+		list0.style.float="left";
+		list0.style.marginRight="7px";
+	}
+	var list1=document.getElementsByClassName("listContainer listCovers inline")[1];
+	if (existeix(list1)){
+		list1.style.minHeight="1000px";
+		list1.style.width="48.958%";
+		list1.style.marginTop="-20px";
+	}
+	var subsectionBig=document.getElementsByClassName("subsection subsectionBig")[0];
+	if (existeix(subsectionBig)){
+		subsectionBig.style.width="101%";
+	}
+	var subtitle=document.getElementsByClassName("inline-subtitle")[1];
+	if (existeix(subtitle)){
+		subtitle.style.marginTop="-49px";
+		subtitle.style.float="left";
+	}
+	var subtitle2=document.getElementsByClassName("inline-subtitle")[2];
+	if (existeix(subtitle2)){
+		subtitle2.style.marginTop="15px";
+		subtitle2.style.borderTop="1px solid #999";
+	}
+	var hr=document.getElementsByTagName("hr")[0];
+	if (existeix(hr)){
+		deleteMe(hr);
 	}
 }
 function addLinks(link_name,child_peli){
@@ -209,54 +213,53 @@ function addIMDB(nom,child_peli,absolute){
 	child_peli.appendChild(a_IMDB);
 }
 function getLinks(){
-	if (window.location.href.indexOf("acc.php")>-1){//user
-    	var pelis_=document.getElementsByClassName("listContainer listCovers inline")[1];
-		if (existeix(pelis_)){
-			var x_pelis=pelis_.getElementsByClassName("ddItemContainer modelContainer");
-			var size_peli=x_pelis.length;
-			if (document.getElementsByClassName("linkly_wobbly").length<size_peli){
-				for (var i_peli=0; i_peli<size_peli; i_peli++){
-					var child_peli=x_pelis[i_peli];
-					if (existeix(child_peli)){
-						var subenlace=child_peli.getElementsByClassName("extended")[0];
-						if (existeix(subenlace)){
-							var enlace=subenlace.href;
-							var old_L=enlace.length;
-							var index_L=enlace.indexOf("id=");
-							var id_=enlace.substr(index_L+3,old_L-index_L-3);
-							var nom=subenlace.getElementsByClassName("title")[0].innerHTML;
-							var link_name='/venlaces.php?npl='+id_;
-							addLinks(link_name,child_peli);
-							reAge(enlace,child_peli);
-							goodLinks(link_name,child_peli);
-							addIMDB(nom,child_peli,true);
-							addFilmaffinity(nom,child_peli,true);
-							//addPirate(nom,child_peli);
-						}
-					}
-				}
-				reSort();
-			}
-    	}
-		var series_=document.getElementsByClassName("listContainer listCovers inline")[0];
-		if (existeix(series_)){
-			var x_series=series_.getElementsByClassName("ddItemContainer modelContainer");
-			var size_series=x_series.length;
-			if (document.getElementsByClassName("linkly_wobbly").length-size_peli<size_series){
-				for (var i_serie=0; i_serie<size_series; i_serie++){
-					var child_serie=x_series[i_serie];
-					if (existeix(child_serie)){
-						var subenlace=child_serie.getElementsByClassName("extended")[0];
-						if (existeix(subenlace)){
-							var nom=subenlace.getElementsByClassName("title")[0].innerHTML;
-							addIMDB(nom,child_serie,true);
-							addFilmaffinity(nom,child_serie,true);
-						}
+	var pelis_=document.getElementsByClassName("listContainer listCovers inline")[1];
+	if (existeix(pelis_)){
+		var x_pelis=pelis_.getElementsByClassName("ddItemContainer modelContainer");
+		var size_peli=x_pelis.length;
+		if (document.getElementsByClassName("linkly_wobbly").length<size_peli){
+			for (var i_peli=0; i_peli<size_peli; i_peli++){
+				var child_peli=x_pelis[i_peli];
+				if (existeix(child_peli)){
+					var subenlace=child_peli.getElementsByClassName("extended")[0];
+					if (existeix(subenlace)){
+						var enlace=subenlace.href;
+						var old_L=enlace.length;
+						var index_L=enlace.indexOf("id=");
+						var id_=enlace.substr(index_L+3,old_L-index_L-3);
+						var nom=subenlace.getElementsByClassName("title")[0].innerHTML;
+						var link_name='/venlaces.php?npl='+id_;
+						addLinks(link_name,child_peli);
+						reAge(enlace,child_peli);
+						goodLinks(link_name,child_peli);
+						addIMDB(nom,child_peli,true);
+						addFilmaffinity(nom,child_peli,true);
+						addMarcaCom(child_peli,id_);
+						//addPirate(nom,child_peli);
 					}
 				}
 			}
-    	}
-    }
+			reSort();
+		}
+	}
+	var series_=document.getElementsByClassName("listContainer listCovers inline")[0];
+	if (existeix(series_)){
+		var x_series=series_.getElementsByClassName("ddItemContainer modelContainer");
+		var size_series=x_series.length;
+		if (document.getElementsByClassName("linkly_wobbly").length-size_peli<size_series){
+			for (var i_serie=0; i_serie<size_series; i_serie++){
+				var child_serie=x_series[i_serie];
+				if (existeix(child_serie)){
+					var subenlace=child_serie.getElementsByClassName("extended")[0];
+					if (existeix(subenlace)){
+						var nom=subenlace.getElementsByClassName("title")[0].innerHTML;
+						addIMDB(nom,child_serie,true);
+						addFilmaffinity(nom,child_serie,true);
+					}
+				}
+			}
+		}
+	}
 }
 function reAge(enlace,child_peli){
 	var old_L=enlace.length;
@@ -583,25 +586,96 @@ function addSpinCircle(child){
 		}
 	}
 }
-function setCookie(cname, cvalue, exdays) {
+function addMarcaCom(child_peli,id_peli){
+	var div_=document.createElement("div");
+	div_.style.width="24px";
+	div_.className="dropdownContainer desplegableAbstract done desplegado";//blue arrow 
+	var span_=document.createElement("span");
+	span_.id='vistamarcarcomo';
+	span_.innerHTML="✔";
+	span_.style.color="#333333";
+	span_.style.padding="5px";
+	div_.appendChild(span_);
+	var ul_=document.createElement("ul");
+	ul_.style.display="none";
+	div_.appendChild(ul_);
+	var li_0=document.createElement("li");
+	li_0.style.marginTop="5px";
+	var li_0_a=document.createElement("a");
+	ul_.appendChild(li_0);
+	li_0_a.innerHTML="X";
+	li_0_a.style.color="#333333";
+	li_0_a.style.padding="5px";
+	var ul_li_0=li_0.appendChild(li_0_a);
+	ul_li_0.onclick=function(){ marcaCom(id_peli,'Nada',span_); };
+	var li_1=document.createElement("li");
+	li_1.style.marginTop="5px";
+	var li_1_a=document.createElement("a");
+	ul_.appendChild(li_1);
+	li_1_a.innerHTML="👁️";
+	li_1_a.style.color="#333333";
+	li_1_a.style.padding="5px";
+	var ul_li_1=li_1.appendChild(li_1_a);
+	ul_li_1.onclick=function(){ marcaCom(id_peli,'Vista',span_); };
+	var li_2=document.createElement("li");
+	li_2.style.marginTop="5px";
+	var li_2_a=document.createElement("a");
+	ul_.appendChild(li_2);
+	li_2_a.innerHTML="✔";
+	li_2_a.style.color="#333333";
+	li_2_a.style.padding="5px";
+	var ul_li_2=li_2.appendChild(li_2_a);
+	ul_li_2.onclick=function(){ marcaCom(id_peli,'Pendiente',span_); };
+	var document_div=child_peli.appendChild(div_);
+	document_div.onclick=function(){
+		var div_drop=document_div.getElementsByTagName("ul")[0];
+		if (existeix(div_drop)){
+			if (div_drop.style.display==="block"){
+				div_drop.style.display="none";
+			}else{
+				div_drop.style.display="block";
+			}
+		}
+	};//function hide
+}
+function marcaCom(id_peli,estado,span_){
+	var e=null;
+	var c=null;
+	if (estado == 'Nada'){
+		e = 0;
+		c = "X";
+	}
+	if (estado == 'Vista'){
+		e = 2;
+		c = "👁️";
+	}
+	if (estado == 'Pendiente'){
+		e = 1;
+		c = "✔";
+	}
+	if (existeix(e)){
+		if (existeix(span_)){
+			span_.innerHTML = c + '&nbsp <span class="caret"></span>';
+			$.get('/peli.php?id='+id_peli+'&estado=' + e + '&seguimiento=zi', null);
+		}
+	}
+}
+function setCookie(cname, cvalue, exdays){
 	var d = new Date();
 	d.setTime(d.getTime() + (exdays*24*60*60*1000));
 	var expires = "expires="+d.toUTCString();
 	document.cookie = cname + "=" + cvalue + "; " + expires;
 }
-function getCookie(cname) {
+function getCookie(cname){
 	var name = cname + "=";
 	var ca = document.cookie.split(';');
-	for(var i=0; i<ca.length; i++) {
+	for (var i=0; i<ca.length; i++){
 		var c = ca[i];
 		while (c.charAt(0)==' ') c = c.substring(1);
 		if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
 	}
 	return "";
 }
-$( document ).ajaxComplete(function( event, request, settings ){
-	reSort();
-});
 edit();
 function reload(){
 	try {
