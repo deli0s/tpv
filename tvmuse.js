@@ -4,6 +4,7 @@ function edit(){
 	sched_link("sched_1");
 	sched_link("sched_2");
 	deleteScriptAds();
+	deleteMe(document.getElementsByTagName("iframe")[0]);
 }
 function sched_link(sched_){
 	var sched=document.getElementById(sched_);
@@ -48,6 +49,12 @@ function addPirate(nom,child){
 }
 function existeix(nom){
 	return (nom!==undefined && nom!==null);
+}
+function deleteMe(child){
+    if (existeix(child)){
+        var pareC=child.parentNode;
+        pareC.removeChild(child);
+    }
 }
 function deleteScriptAds(){
     var x_script=document.getElementsByTagName("script");
