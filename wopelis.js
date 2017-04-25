@@ -5,26 +5,14 @@ function linkAds(e){
 
 function edit(){
 	deleteClickAds();
-	deleteScriptAds();
+	//deleteScriptAds();
+	var button_acc=false;
 	var button_=document.getElementsByTagName("button")[0];
 	if (existeix(button_)){
 		if (button_.innerHTML==="Acepto y quiero entrar"){
 			button_.click();
 		}
-	}else{
-		if (window.location.href.indexOf("acc.php")>-1){//user
-			$( document ).ajaxComplete(function( event, request, settings ){
-				reSort();
-			});
-			getLinks();
-			reSize();
-		}
 	}
-	addLinks2();
-	//CSS
-	var sheet = window.document.styleSheets[0];
-	sheet.insertRule('button:hover,input[type=submit]:hover,.dropdownContainer.blue:hover{background:#0a5bc2;}', sheet.cssRules.length);
-	sheet.insertRule('@media (min-width: 580px) {div.link{ margin:0 5% 0 5%;}div.link{background-color:#e8e8e8;clear:both;width:80%;padding:10px;float:left;border:solid 1px #dcdcdc;max-width:1050px;min-width:365px}', sheet.cssRules.length);
 	//
 	if (window.location.href.indexOf("venlaces") > -1){
 		deleteScreener();
@@ -33,8 +21,7 @@ function edit(){
 		if (existeix(title_)){
 			document.title=title_.innerHTML.replace("Viendo enlaces de: ","");
 		}
-		//no redir
-		var online_=document.getElementsByTagName("h1")[2];
+		var online_=document.getElementsByTagName("h1")[1];
 		if (existeix(online_)){
 			if (online_.innerHTML.indexOf("Online")>-1){
 				online_.style.marginTop="-50px";
@@ -46,7 +33,18 @@ function edit(){
 				deleteMe(title2_);
 			}
 		}
-		
+	}
+	if (window.location.href.indexOf("acc.php")>-1){//user && !button_acc
+		addLinks2();
+		reSize();
+		setTimeout(function(){
+			if (existeix($( document ))){
+				$( document ).ajaxComplete(function( event, request, settings ){
+					reSort();
+				});
+				getLinks();
+			}
+		}, 50);
 	}
 }//end edit
 
@@ -111,6 +109,14 @@ function reSize(){
 	if (existeix(hr)){
 		deleteMe(hr);
 	}
+}
+function addJQuery(){
+	if (!jq_script){
+		var jq_=document.createElement("script");
+		jq_.src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js";
+		document.head.appendChild(jq_);
+	}
+	jq_script=true;
 }
 function addLinks(link_name,child_peli){
 	var a_link=document.createElement("a");
@@ -671,6 +677,15 @@ function getCookie(cname){
 	}
 	return "";
 }
+function editOnce(){
+	addJQuery();
+	//CSS
+	var sheet = window.document.styleSheets[0];
+	sheet.insertRule('button:hover,input[type=submit]:hover,.dropdownContainer.blue:hover{background:#0a5bc2;}', sheet.cssRules.length);
+	sheet.insertRule('@media (min-width: 580px) {div.link{ margin:0 5% 0 5%;}div.link{background-color:#e8e8e8;clear:both;width:80%;padding:10px;float:left;border:solid 1px #dcdcdc;max-width:1050px;min-width:365px}', sheet.cssRules.length);
+}
+var jq_script=false;
+editOnce();
 edit();
 function reload(){
 	try {
