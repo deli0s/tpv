@@ -7,29 +7,17 @@ function edit(){
 				var video=videos[i_video];
 				if (existeix(video)){
 					var watched=video.getElementsByClassName("resume-playback-progress-bar")[0];
-					if (existeix(watched)){
+					var title_=video.getElementsByTagName("a")[2];
+					var h3_=video.getElementsByTagName("h3")[0];
+					var late=(title_.innerHTML.indexOf("LATE MOTIV")>-1);
+					var late_david=(h3_.innerHTML.indexOf("Broncano")>-1);
+					var late_berto=(h3_.innerHTML.indexOf("Romero")>-1);
+					var late_ign=(h3_.innerHTML.indexOf("ignatius")>-1);
+					var terrat=(title_.innerHTML.indexOf("TERRAT")>-1);
+					var NSN=(h3_.innerHTML.indexOf("NADIE SABE NADA")>-1);
+					if (existeix(watched) || (late && !late_david && !late_berto && !late_ign) || (terrat && !NSN)){
 						deleteByClass("yt-shelf-grid-item",i_video);
 						i_video--;
-					}else{
-						var h3_=video.getElementsByTagName("h3")[0];
-						var late=(h3_.innerHTML.indexOf("LATE MOTIV")>-1);
-						var late_david=(h3_.innerHTML.indexOf("Broncano")>-1);
-						var late_berto=(h3_.innerHTML.indexOf("Romero")>-1);
-						var late_ign=(h3_.innerHTML.indexOf("ignatius")>-1);
-						if (late){
-							if (!late_david && !late_berto && !late_ign){
-								deleteByClass("yt-shelf-grid-item",i_video);
-								i_video--;
-							}
-						}
-						var terrat=(h3_.innerHTML.indexOf("TERRAT")>-1);
-						var NSN=(h3_.innerHTML.indexOf("NADIE SABE NADA")>-1);
-						if (terrat){
-							if (!NSN){
-								deleteByClass("yt-shelf-grid-item",i_video);
-								i_video--;
-							}
-						}
 					}
 				//console.log(i_video);
 				}
