@@ -11,13 +11,21 @@ function edit(){
 						deleteByClass("yt-shelf-grid-item",i_video);
 						i_video--;
 					}else{
-						var late_h3=video.getElementsByTagName("h3")[0];
-						var late=(late_h3.innerHTML.indexOf("LATE MOTIV")>-1);
-						var late_david=(late_h3.innerHTML.indexOf("Broncano")>-1);
-						var late_berto=(late_h3.innerHTML.indexOf("Romero")>-1);
-						var late_ign=(late_h3.innerHTML.indexOf("ignatius")>-1);
+						var h3_=video.getElementsByTagName("h3")[0];
+						var late=(h3_.innerHTML.indexOf("LATE MOTIV")>-1);
+						var late_david=(h3_.innerHTML.indexOf("Broncano")>-1);
+						var late_berto=(h3_.innerHTML.indexOf("Romero")>-1);
+						var late_ign=(h3_.innerHTML.indexOf("ignatius")>-1);
 						if (late){
 							if (!late_david && !late_berto && !late_ign){
+								deleteByClass("yt-shelf-grid-item",i_video);
+								i_video--;
+							}
+						}
+						var terrat=(h3_.innerHTML.indexOf("TERRAT")>-1);
+						var NSN=(h3_.innerHTML.indexOf("NADIE SABE NADA")>-1);
+						if (terrat){
+							if (!NSN){
 								deleteByClass("yt-shelf-grid-item",i_video);
 								i_video--;
 							}
