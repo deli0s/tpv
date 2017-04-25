@@ -28,11 +28,6 @@ function edit(){
 	//
 	if (window.location.href.indexOf("venlaces") > -1){
 		deleteScreener();
-		//Subir enlaces
-		var upload_=document.getElementsByTagName("form")[0];
-		if (existeix(upload_)){
-			upload_.style.float="right";
-		}
 		//title
 		var title_=document.getElementsByTagName("h1")[0];
 		if (existeix(title_)){
@@ -399,9 +394,9 @@ function creaFolder(f,ttl,sub,f_txt,ls_lk){
     }
 }
 function deleteScreener(){
-    creaFolder("folder","folder_title","folder_scr"," Screener (0)",document.getElementsByTagName("h1")[2]);
-    creaFolder("folder_lat","folder_title_lat","folder_lat"," LAT (0)",document.getElementsByTagName("h1")[2]);
-    creaFolder("folder_down","folder_title_down","folder_down"," Downloads (0)",document.getElementsByTagName("h1")[3]);
+    creaFolder("folder","folder_title","folder_scr"," Screener (0)",document.getElementsByTagName("h1")[1]);
+    creaFolder("folder_lat","folder_title_lat","folder_lat"," LAT (0)",document.getElementsByTagName("h1")[1]);
+    creaFolder("folder_down","folder_title_down","folder_down"," Downloads (0)",document.getElementsByTagName("h1")[2]);
     
 	var hh1=document.getElementsByTagName("h1")[1];
 	if (existeix(hh1)){
