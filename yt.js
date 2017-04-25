@@ -9,7 +9,7 @@ function edit(){
 					var watched=video.getElementsByClassName("resume-playback-progress-bar")[0];
 					var title_=video.getElementsByTagName("a")[2];
 					var h3_=video.getElementsByTagName("h3")[0];
-					var late=(title_.innerHTML.indexOf("LATE MOTIV")>-1);
+					var late=(title_.innerHTML.indexOf("Late Motiv")>-1);
 					var late_david=(h3_.innerHTML.indexOf("Broncano")>-1);
 					var late_berto=(h3_.innerHTML.indexOf("Romero")>-1);
 					var late_ign=(h3_.innerHTML.indexOf("ignatius")>-1);
