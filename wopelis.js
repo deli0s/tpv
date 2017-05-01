@@ -5,6 +5,7 @@ function linkAds(e){
 
 function edit(){
 	deleteClickAds();
+	addLinks2();
 	//deleteScriptAds();
 	var button_acc=false;
 	var button_=document.getElementsByTagName("button")[0];
@@ -35,7 +36,6 @@ function edit(){
 		}
 	}
 	if (window.location.href.indexOf("acc.php")>-1){//user && !button_acc
-		addLinks2();
 		reSize();
 		setTimeout(function(){
 			if (existeix($( document ))){
