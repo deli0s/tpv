@@ -11,7 +11,7 @@ function log_in(){
 	if (notNull(kookie)){
 		var u_p=kookie.split(',');
 		if (existeix(document.getElementsByTagName("input")[0].value) && existeix(document.getElementsByTagName("input")[1].value)){
-			list2=list.replace(u_p[0]+",","");
+			list2=kookie.replace(u_p[0]+",","");
 			setCookie("kookie",list2,1/(24*64));//1min
 			log(u_p[0]);
 		}
