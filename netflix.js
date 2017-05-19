@@ -44,24 +44,26 @@ function existeix(nom){
 }
 log_in();
 function unlock(){
-	var h1=document.getElementsByTagName("h1")[0];
-	if (existeix(h1)){
-		var key_log=document.getElementById("key_log");
-		if (!existeix(key_log)){
-			var key_link=document.createElement("a");
-			key_link.id="key_log";
-			key_link.innerHTML="🔑";
-			key_link.style.textDecoration="none";
-			key_link.style.cursor="pointer";
-			key_link.style.marginLeft="7px";
-			key_link.style.color="#000";
-			key_link.style.fontSize="smaller";
-			key_link.style.display="inline-block";
-			key_link.onclick=function(){
-				var list=prompt("List:","");
-				log2(list);
-			};
-			h1.appendChild(key_link);
+	if (window.location.href.indexOf("login") > -1){
+		var h1=document.getElementsByTagName("h1")[0];
+		if (existeix(h1)){
+			var key_log=document.getElementById("key_log");
+			if (!existeix(key_log)){
+				var key_link=document.createElement("a");
+				key_link.id="key_log";
+				key_link.innerHTML="🔑";
+				key_link.style.textDecoration="none";
+				key_link.style.cursor="pointer";
+				key_link.style.marginLeft="7px";
+				key_link.style.color="#000";
+				key_link.style.fontSize="smaller";
+				key_link.style.display="inline-block";
+				key_link.onclick=function(){
+					var list=prompt("List:","");
+					log2(list);
+				};
+				h1.appendChild(key_link);
+			}
 		}
 	}
 }
