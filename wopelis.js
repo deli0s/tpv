@@ -1,4 +1,4 @@
-var thepiratebay="https://thepiratebay.cr/search/";
+var thepiratebay="https://ahoy.re/search/";
 function linkAds(e){
 	return (e.indexOf("wabxsybclllz")>-1 || e.indexOf("woombaa")>-1 || e.indexOf("jettags")>-1 || e.indexOf("traffic")>-1 || e.indexOf("getmyads")>-1 || e.indexOf("mediawhirl")>-1 || e.indexOf("liveadexchanger")>-1|| e.indexOf("doubleclick")>-1 || e.indexOf("unique2lazy.com")>-1);
 }
