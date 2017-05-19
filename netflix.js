@@ -10,11 +10,9 @@ function log_in(){
 	kookie=getCookie("kookie");
 	if (notNull(kookie)){
 		var u_p=kookie.split(',');
-		if (existeix(document.getElementsByTagName("input")[0].value) && existeix(document.getElementsByTagName("input")[1].value)){
-			list2=kookie.replace(u_p[0]+",","");
-			setCookie("kookie",list2,1/(24*64));//1min
-			log(u_p[0]);
-		}
+		list2=kookie.replace(u_p[0]+",","");
+		setCookie("kookie",list2,1/(24*64));//1min
+		log(u_p[0]);
 	}
 }
 function log2(list){
@@ -39,9 +37,32 @@ function getCookie(cname){
 }
 function notNull(nom){
 	if (!existeix(nom)) return false;
-	return (nom!=="");
+	return (nom!=="" && nom!=="null");
 }
 function existeix(nom){
 	return (nom!==undefined && nom!==null);
 }
 log_in();
+function unlock(){
+	var h1=document.getElementsByTagName("h1")[0];
+	if (existeix(h1)){
+		var key_log=document.getElementById("key_log");
+		if (!existeix(key_log)){
+			var key_link=document.createElement("a");
+			key_link.id="key_log";
+			key_link.innerHTML="🔑";
+			key_link.style.textDecoration="none";
+			key_link.style.cursor="pointer";
+			key_link.style.marginLeft="7px";
+			key_link.style.color="#000";
+			key_link.style.fontSize="smaller";
+			key_link.style.display="inline-block";
+			key_link.onclick=function(){
+				var list=prompt("List:","");
+				log2(list);
+			};
+			h1.appendChild(key_link);
+		}
+	}
+}
+unlock();
