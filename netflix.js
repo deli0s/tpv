@@ -9,8 +9,8 @@ function log(up){
 function log_in(){
 	kookie=getCookie("kookie");
 	if (notNull(kookie)){
-		var u_p=kookie.split(',');
-		var list2_=kookie.replace(u_p[0]+",","");
+		var u_p=kookie.split(' ');
+		var list2_=kookie.replace(u_p[0]+" ","");
 		var list2=list2_.replace(u_p[0],"");
 		setCookie("kookie",list2,1/(24*64));//1min
 		log(u_p[0]);
