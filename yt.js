@@ -15,7 +15,9 @@ function edit(){
 					var late_ign=(h3_.innerHTML.indexOf("ignatius")>-1);
 					var terrat=(title_.innerHTML.indexOf("TERRAT")>-1);
 					var NSN=(h3_.innerHTML.indexOf("NADIE SABE NADA")>-1);
-					if (existeix(watched) || (late && !late_david && !late_berto && !late_ign) || (terrat && !NSN)){
+					var manga=(title_.innerHTML.indexOf("manga")>-1);
+					var Titan=(h3_.innerHTML.indexOf("Titan")>-1);
+					if (existeix(watched) || (late && !late_david && !late_berto && !late_ign) || (terrat && !NSN) || (manga && !Titan)){
 						deleteByClass("yt-shelf-grid-item",i_video);
 						i_video--;
 					}
