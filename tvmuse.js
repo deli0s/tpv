@@ -70,6 +70,7 @@ function deleteScriptAds(){
     }
 }
 edit();
+sinline_tvhide('2');
 function reload(){
 	try {
         edit();
