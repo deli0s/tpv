@@ -17,7 +17,9 @@ function edit(){
 					var NSN=(h3_.innerHTML.indexOf("NADIE SABE NADA")>-1);
 					var manga=(title_.innerHTML.indexOf("manga")>-1);
 					var Titan=(h3_.innerHTML.indexOf("Titan")>-1);
-					if (existeix(watched) || (late && !late_david && !late_berto && !late_ign) || (terrat && !NSN) || (manga && !Titan)){
+					var LOL=(title_.innerHTML.indexOf("Oh! My LOL")>-1);
+					var moderna=(h3_.innerHTML.indexOf("moderna ")>-1);
+					if (existeix(watched) || (late && !late_david && !late_berto && !late_ign) || (terrat && !NSN) || (manga && !Titan) || (LOL && !moderna)){
 						deleteByClass("yt-shelf-grid-item",i_video);
 						i_video--;
 					}
