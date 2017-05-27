@@ -65,6 +65,11 @@ function addLinks2(){
 					addIMDB(h1_inner,h2_go_to,false);
 					addFilmaffinity(h1_inner,h2_go_to,false);
 				}
+				var h3_go_to=document.getElementsByTagName("h3")[0];
+				if (existeix(h3_go_to)){
+					addIMDB(h1_inner,h3_go_to,false);
+					addFilmaffinity(h1_inner,h3_go_to,false);
+				}
 			}
 		}
 	}
