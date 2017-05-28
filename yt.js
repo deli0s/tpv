@@ -7,19 +7,7 @@ function edit(){
 				var video=videos[i_video];
 				if (existeix(video)){
 					var watched=video.getElementsByClassName("resume-playback-progress-bar")[0];
-					var title_=video.getElementsByTagName("a")[2];
-					var h3_=video.getElementsByTagName("h3")[0];
-					var late=(title_.innerHTML.indexOf("Late Motiv")>-1);
-					var late_david=(h3_.innerHTML.indexOf("Broncano")>-1);
-					var late_berto=(h3_.innerHTML.indexOf("Romero")>-1);
-					var late_ign=(h3_.innerHTML.indexOf("ignatius")>-1);
-					var terrat=(title_.innerHTML.indexOf("TERRAT")>-1);
-					var NSN=(h3_.innerHTML.indexOf("NADIE SABE NADA")>-1);
-					var manga=(title_.innerHTML.indexOf("manga")>-1);
-					var Titan=(h3_.innerHTML.indexOf("Titan")>-1);
-					var LOL=(title_.innerHTML.indexOf("Oh! My LOL")>-1);
-					var moderna=(h3_.innerHTML.indexOf("moderna ")>-1);
-					if (existeix(watched) || (late && !late_david && !late_berto && !late_ign) || (terrat && !NSN) || (manga && !Titan) || (LOL && !moderna)){
+					if (existeix(watched) || t_(video,"Late Motiv","Broncano") || t_(video,"Late Motiv","Romero") || t_(video,"Late Motiv","ignatius") || t_(video,"TERRAT","NADIE SABE NADA") || t_(video,"manga","Titan") || t_(video,"Oh! My LOL","moderna ") || t_(video,"Oh! My LOL","moderna ") || t_(video,"Jimmy Fallon","Hashtags") || t_(video,"WIRED","Answer the Web")){
 						deleteByClass("yt-shelf-grid-item",i_video);
 						i_video--;
 					}
@@ -28,6 +16,14 @@ function edit(){
 			}
 		}
 	}
+}
+
+function t_(video,title_str,h3_str){//title
+	var title_=video.getElementsByTagName("a")[2];
+	var h3_=video.getElementsByTagName("h3")[0];
+	var title_2=(title_.innerHTML.indexOf(title_str)>-1);
+	var h3_2=(h3_.innerHTML.indexOf(h3_str)>-1);
+	return (title_2 && !h3_2);
 }
 
 function existeix(nom){
