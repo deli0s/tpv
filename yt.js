@@ -19,10 +19,10 @@ function edit(){
 }
 
 function t_(video,title_str,h3_str){//title
-	var title_=video.getElementsByTagName("a")[2].toLowerCase();
-	var h3_=video.getElementsByTagName("h3")[0].toLowerCase();
-	var title_2=(title_.innerHTML.indexOf(title_str.toLowerCase())>-1);
-	var h3_2=(h3_.innerHTML.indexOf(h3_str.toLowerCase())>-1);
+	var title_=video.getElementsByTagName("a")[2];
+	var h3_=video.getElementsByTagName("h3")[0];
+	var title_2=(title_.innerHTML.toLowerCase().indexOf(title_str.toLowerCase())>-1);
+	var h3_2=(h3_.innerHTML.toLowerCase().indexOf(h3_str.toLowerCase())>-1);
 	return (title_2 && !h3_2);
 }
 
