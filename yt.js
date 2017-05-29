@@ -7,7 +7,7 @@ function edit(){
 				var video=videos[i_video];
 				if (existeix(video)){
 					var watched=video.getElementsByClassName("resume-playback-progress-bar")[0];
-					if (existeix(watched) || t_(video,"Late Motiv","Broncano") || t_(video,"Late Motiv","Romero") || t_(video,"Late Motiv","ignatius") || t_(video,"TERRAT","NADIE SABE NADA") || t_(video,"manga","Titan") || t_(video,"Oh! My LOL","Moderna ") || t_(video,"Jimmy Fallon","Hashtags") || t_(video,"WIRED","Answer the Web") || t_(video,"Pazos64","Cuidao Ahí")){
+					if (existeix(watched) || t_(video,"Late Motiv","Broncano") || t_(video,"Late Motiv","Romero") || t_(video,"Late Motiv","ignatius") || t_(video,"TERRAT","NADIE SABE NADA") || t_(video,"manga","Titan") || t_(video,"Oh! My LOL","Moderna ") || t_(video,"Jimmy Fallon","Hashtags") || t_(video,"WIRED","Answer the Web")){
 						deleteByClass("yt-shelf-grid-item",i_video);
 						i_video--;
 					}
@@ -19,10 +19,10 @@ function edit(){
 }
 
 function t_(video,title_str,h3_str){//title
-	var title_=video.getElementsByTagName("a")[2];
-	var h3_=video.getElementsByTagName("h3")[0];
-	var title_2=(title_.innerHTML.indexOf(title_str)>-1);
-	var h3_2=(h3_.innerHTML.indexOf(h3_str)>-1);
+	var title_=video.getElementsByTagName("a")[2].toLowerCase();
+	var h3_=video.getElementsByTagName("h3")[0].toLowerCase();
+	var title_2=(title_.innerHTML.indexOf(title_str.toLowerCase())>-1);
+	var h3_2=(h3_.innerHTML.indexOf(h3_str.toLowerCase())>-1);
 	return (title_2 && !h3_2);
 }
 
