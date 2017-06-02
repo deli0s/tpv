@@ -49,8 +49,8 @@ function edit2(){
     }
     //
     if ((window.location.href.endsWith("pelis")) || (window.location.href.endsWith("pelis/")) || (window.location.href.endsWith("series/")) || (window.location.href.indexOf("pelis/index") > -1) || (window.location.href.endsWith("series")) || (window.location.href.indexOf("series/index") > -1)){
-        borra();
-        document.getElementById("stickyfooterWrapper").onclick=borra;
+        /*borra();
+        document.getElementById("stickyfooterWrapper").onclick=borra;*/
     }
     //
 	var logIn_page=document.getElementById("login-form");
@@ -146,7 +146,7 @@ function edit2(){
 	if ((window.location.href.indexOf("pordede.com/peli/") > -1) || (window.location.href.indexOf("pordede.com/serie/") > -1)){
 		if (document.getElementById("TPB")===null){
 			var llink=document.getElementsByClassName("info moreinfoLink")[0];
-			if (llink!==undefined && llink!==null){
+			if (existeix(llink){
 			var enlace=window.location.href;
 				if (existeix(enlace)){
 					var nom_serie=enlace.replace("serie","peli");
