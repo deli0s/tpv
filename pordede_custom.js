@@ -146,7 +146,7 @@ function edit2(){
 	if ((window.location.href.indexOf("pordede.com/peli/") > -1) || (window.location.href.indexOf("pordede.com/serie/") > -1)){
 		if (document.getElementById("TPB")===null){
 			var llink=document.getElementsByClassName("info moreinfoLink")[0];
-			if (existeix(llink){
+			if (existeix(llink)){
 			var enlace=window.location.href;
 				if (existeix(enlace)){
 					var nom_serie=enlace.replace("serie","peli");
