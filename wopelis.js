@@ -553,19 +553,26 @@ function reSort(){
 		if (existeix(x_pelis)){
 			var size_peli=x_pelis.length;
 			if (document.getElementsByClassName("opacity").length===size_peli){
-				var i_opacity=0;
-				for (var i_peli=0; i_peli<size_peli; i_peli++){
-					var child_peli=x_pelis[i_peli];
-					if (existeix(child_peli)){
-						if (child_peli.style.opacity==1){
-							swap(pelis_,i_opacity,i_peli);
-							i_opacity++;
+				if (!existeix(document.getElementById("loding_circle"))){
+					var i_opacity=0;
+					for (var i_peli=0; i_peli<size_peli; i_peli++){
+						var child_peli=x_pelis[i_peli];
+						if (existeix(child_peli)){
+							if (child_peli.style.opacity==1){
+								swap(pelis_,i_opacity,i_peli);
+								i_opacity++;
+							}
 						}
 					}
+					sort_year(pelis_,0,i_opacity-1);
+					setTimeout(function(){ sort_year(pelis_,i_opacity,size_peli-1); }, 500);
 				}
-				sort_year(pelis_,0,i_opacity-1);
-				setTimeout(function(){ sort_year(pelis_,i_opacity,size_peli-1); }, 500);
-				setTimeout(function(){ deleteById("loding_circle"); }, 1000);
+				setTimeout(function(){
+					var loding_circle=document.getElementById("loding_circle");
+						if (existeix(loding_circle)){
+							loding_circle.style.display="none";
+						}
+				}, 1000);
 			}
 		}
 	}
@@ -592,46 +599,38 @@ function addSpinCircle(child){
 		}
 	}
 }
+function addMarcaLi(ul_,type,span_,id_peli){
+	var li_=document.createElement("li");
+	li_.style.marginTop="5px";
+	var li_a=document.createElement("a");
+	ul_.appendChild(li_);
+	li_a.innerHTML=status_type[type];
+	addMarcaI(li_a,icon_type[type],"null");
+	var ul_li=li_.appendChild(li_a);
+	ul_li.onclick=function(){ marcaCom(id_peli,type,span_); };
+}
+function addMarcaI(toAppend,i_class,id_peli){
+	var i_=document.createElement("i");
+	i_.className=i_class;
+	i_.id="icono_cover_"+id_peli;
+	toAppend.appendChild(i_);
+}
 function addMarcaCom(child_peli,id_peli){
 	var div_=document.createElement("div");
-	div_.style.width="24px";
-	div_.className="dropdownContainer desplegableAbstract done desplegado";//blue arrow 
+	div_.className="dropdownContainer desplegableAbstract done";
 	var span_=document.createElement("span");
-	span_.id='vistamarcarcomo';
-	span_.innerHTML="✔";
-	span_.style.color="#333333";
-	span_.style.padding="5px";
+	addMarcaI(span_,"icon-caret-down",id_peli);
 	div_.appendChild(span_);
 	var ul_=document.createElement("ul");
 	ul_.style.display="none";
+	ul_.className="dropdown";
+	ul_.style.zIndex="100000";
+	ul_.style.pointerEvents="auto";
 	div_.appendChild(ul_);
-	var li_0=document.createElement("li");
-	li_0.style.marginTop="5px";
-	var li_0_a=document.createElement("a");
-	ul_.appendChild(li_0);
-	li_0_a.innerHTML="X";
-	li_0_a.style.color="#333333";
-	li_0_a.style.padding="5px";
-	var ul_li_0=li_0.appendChild(li_0_a);
-	ul_li_0.onclick=function(){ marcaCom(id_peli,'Nada',span_); };
-	var li_1=document.createElement("li");
-	li_1.style.marginTop="5px";
-	var li_1_a=document.createElement("a");
-	ul_.appendChild(li_1);
-	li_1_a.innerHTML="👁️";
-	li_1_a.style.color="#333333";
-	li_1_a.style.padding="5px";
-	var ul_li_1=li_1.appendChild(li_1_a);
-	ul_li_1.onclick=function(){ marcaCom(id_peli,'Vista',span_); };
-	var li_2=document.createElement("li");
-	li_2.style.marginTop="5px";
-	var li_2_a=document.createElement("a");
-	ul_.appendChild(li_2);
-	li_2_a.innerHTML="✔";
-	li_2_a.style.color="#333333";
-	li_2_a.style.padding="5px";
-	var ul_li_2=li_2.appendChild(li_2_a);
-	ul_li_2.onclick=function(){ marcaCom(id_peli,'Pendiente',span_); };
+	addMarcaLi(ul_,0,span_,id_peli);
+	addMarcaLi(ul_,2,span_,id_peli);
+	addMarcaLi(ul_,1,span_,id_peli);
+	child_peli.appendChild(div_);
 	var document_div=child_peli.appendChild(div_);
 	document_div.onclick=function(){
 		var div_drop=document_div.getElementsByTagName("ul")[0];
@@ -645,25 +644,12 @@ function addMarcaCom(child_peli,id_peli){
 	};//function hide
 }
 function marcaCom(id_peli,estado,span_){
-	var e=null;
-	var c=null;
-	if (estado == 'Nada'){
-		e = 0;
-		c = "X";
+	var c=document.getElementById("icono_cover_"+id_peli);
+	if (existeix(c)){
+		c.className = icon_type[estado];
 	}
-	if (estado == 'Vista'){
-		e = 2;
-		c = "👁️";
-	}
-	if (estado == 'Pendiente'){
-		e = 1;
-		c = "✔";
-	}
-	if (existeix(e)){
-		if (existeix(span_)){
-			span_.innerHTML = c + '&nbsp <span class="caret"></span>';
-			$.get('/peli.php?id='+id_peli+'&estado=' + e + '&seguimiento=zi', null);
-		}
+	if (existeix(span_)){
+		$.get('/peli.php?id='+id_peli+'&estado=' + estado + '&seguimiento=zi', null);
 	}
 }
 function setCookie(cname, cvalue, exdays){
@@ -692,6 +678,8 @@ function editOnce(){
 var jq_script=false;
 editOnce();
 edit();
+var icon_type=["fa fa-times","icon-check","icon-eye-close"];
+var status_type=["Nada","Pendiente","Vista"];
 function reload(){
 	try {
         edit();
