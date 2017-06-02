@@ -48,10 +48,10 @@ function edit2(){
         document.getElementsByClassName("info listContainer listCovers")[0].style.maxHeight="9999px";
     }
     //
-    if ((window.location.href.endsWith("pelis")) || (window.location.href.endsWith("pelis/")) || (window.location.href.endsWith("series/")) || (window.location.href.indexOf("pelis/index") > -1) || (window.location.href.endsWith("series")) || (window.location.href.indexOf("series/index") > -1)){
-        /*borra();
-        document.getElementById("stickyfooterWrapper").onclick=borra;*/
-    }
+    /*if ((window.location.href.endsWith("pelis")) || (window.location.href.endsWith("pelis/")) || (window.location.href.endsWith("series/")) || (window.location.href.indexOf("pelis/index") > -1) || (window.location.href.endsWith("series")) || (window.location.href.indexOf("series/index") > -1)){
+        borra();
+        document.getElementById("stickyfooterWrapper").onclick=borra;
+    }*/
     //
 	var logIn_page=document.getElementById("login-form");
 	if (logIn_page===null){
