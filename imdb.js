@@ -26,11 +26,9 @@ function edit(){
 	if (existeix(watchlist)){
 		var watchlist_a=watchlist.getElementsByTagName("a")[0];
 		if (existeix(watchlist_a)){
+			watchlist_a.style.fontWeight="bold";
 			watchlist_a.href="/user/ur76483198/watchlist?sort=release_date%2Casc&view=detail";
 		}
-	}
-	if (window.location.href.indexOf("watchlist") > -1){
-		//for
 	}
 }//end edit
 
