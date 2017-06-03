@@ -22,6 +22,27 @@ function edit(){
 			}
 		}
 	}
+	if (window.location.href.indexOf("releaseinfo") > -1){
+		var dates_table=document.getElementById("release_dates");
+		if (existeix(dates_table)){
+			var dates=dates_table.getElementsByTagName("tr");
+			var dates_size=dates.length;
+			var dates_i=0;
+			var trobats=0;
+			while (dates_i<dates_size && trobats<2){
+				var dates_tr=dates[dates_i];
+				var dates_a=dates_tr.getElementsByTagName("a")[0];
+				if (existeix(dates_a)){
+					var dates_inner=dates_a.innerHTML;
+					if (dates_inner.indexOf("USA")>-1 || dates_inner.indexOf("Spain")>-1){
+						dates_a.style.color="#E7BE00";
+						trobats++;
+					}
+				}
+				dates_i++;
+			}
+		}
+	}
 	var watchlist=document.getElementsByClassName("watchlist")[0];
 	if (existeix(watchlist)){
 		var watchlist_a=watchlist.getElementsByTagName("a")[0];
