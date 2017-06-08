@@ -69,8 +69,41 @@ function deleteScriptAds(){
         }
     }
 }
+function dateType(){
+    var months=document.getElementsByClassName("light");
+    var months_size=months.length;
+    for (var months_i=0; months_i<months_size; months_i++){
+		var month_sub=months[months_i];
+        if (existeix(month_sub)){
+			var month_inner=month_sub.innerHTML;
+			var month_split=month_inner.split(" ")[1].split("/");
+			//months[months_i].innerHTML=month_inner.replace(month_split[0]+"/"+month_split[1],month_split[1]+"/"+month_split[0]);
+			if (month_split.length===2){
+				months[months_i].innerHTML=month_inner.replace(month_split[0]+"/","");
+			}
+		}
+	}
+	
+	var hours=document.getElementsByClassName("block small");
+    var hours_size=hours.length;
+    for (var hours_i=0; hours_i<hours_size; hours_i++){
+		var hour_sub=hours[hours_i];
+        if (existeix(hour_sub)){
+			var hour_inner=hour_sub.innerHTML;
+			var pos=hour_inner.indexOf(" PM ");
+			if (pos>-1){
+				var hour_str=hour_inner.substr(0,pos);
+				var hour_split=hour_str.split(":");
+				hour_inner=hour_inner.replace(hour_split[0]+":"+hour_split[1],(Number(hour_split[0])+12)+":"+hour_split[1]);
+			}
+			hour_inner=hour_inner.replace(" PM "," ");
+			hours[hours_i].innerHTML=hour_inner.replace(" AM "," ");
+		}
+	}
+}
 edit();
 sinline_tvhide('2');
+dateType();
 function reload(){
 	try {
         edit();
