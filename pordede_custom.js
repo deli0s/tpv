@@ -114,6 +114,7 @@ function edit2(){
 				}
 			}
 			//
+			setTimeout(function(){ deleteBox(); }, 250);
 			deleteByClass("configMenu",0);
 			deleteByClass("actionsContainer",0);
 			var child_title=document.getElementsByClassName("inline-subtitle");
@@ -159,6 +160,18 @@ function edit2(){
     getLinks();
     deleteLinks();
 }//end edit2
+function deleteBox(){
+	var sidebar_=document.getElementsByClassName("sidebar")[0];
+	if (existeix(sidebar_)){
+		var box_=sidebar_.getElementsByClassName("box")[0];
+		if (existeix(box_)){
+			var box_inner=box_.innerHTML;
+			if (box_inner.indexOf("fb-page")>-1){
+				deleteMe(box_);
+			}
+		}
+	}
+}
 function existeix(nom){
 	return (nom!==undefined && nom!==null);
 }
@@ -475,8 +488,8 @@ function deleteLinks(){
 function deleteById(nom){
 	var childAdv=document.getElementById(nom);
 	if (childAdv!==null && childAdv!==undefined){
-	var pareAdv=childAdv.parentNode;
-	pareAdv.removeChild(childAdv);
+		var pareAdv=childAdv.parentNode;
+		pareAdv.removeChild(childAdv);
 	}
 }
 function deleteByClass(nom,num){
