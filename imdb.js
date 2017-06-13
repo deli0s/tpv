@@ -1,4 +1,4 @@
-var thepiratebay="https://ahoy.re/search/";
+var thepiratebay="https://thepiratebay.cr/search/";
 function edit(){
 	if (window.location.href.indexOf("title") > -1){
 		var title_=document.getElementsByTagName("h1")[1];
