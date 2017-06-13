@@ -1,4 +1,4 @@
-var thepiratebay="https://ahoy.re/search/";
+var thepiratebay="https://thepiratebay.cr/search/";
 function edit(){
 	sched_link("sched_0");
 	sched_link("sched_1");
