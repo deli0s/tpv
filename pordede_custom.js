@@ -1,4 +1,4 @@
-var thepiratebay="https://ahoy.re/search/";
+var thepiratebay="https://thepiratebay.cr/search/";
 function edit2(){
     if ($('[id^=up]').length==1){
         var divtest=document.createElement("div");
