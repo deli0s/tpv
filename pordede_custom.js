@@ -450,6 +450,29 @@ function deleteLinks(){
 									}
 								}
 							}
+						}else{//no icon-warning-sign
+							if (nums[1].innerHTML-nums[0].innerHTML>=2){
+								var pare_link2=child_link2.parentNode;
+								pare_link2.innerHTML="<a style=' color: maroon; font-weight: bolder;' title='"+quality+" "+nums[0].innerHTML+" "+nums[1].innerHTML+"'> Esborrat </a>";
+								i_link2--;
+							}else{
+								if (child_link2.innerHTML.search("LAT")>-1){
+									var pare_lat=child_link2.parentNode;
+									if ((scr_hide+scr_non)<num_down){
+										var cln_lat = pare_lat.cloneNode(true);
+										cln_lat.getElementsByClassName("modelContainer linkContainer")[0].className="";
+										document.getElementById("folder_lat").appendChild(cln_lat);
+										lat++;
+									}
+									pare_lat.innerHTML="";
+									i_link2--;
+								}else{
+									if (((scr_hide+scr_non)<num_down) && (Number(nums[0].innerHTML)>Number(max_up))){//find max up (likes)
+										max_child_link2=child_link2;
+										max_up=nums[0].innerHTML;
+									}
+								}
+							}
 						}
 					}else{
 						/*var size_new=document.getElementsByClassName("modelContainer linkContainer").length;
