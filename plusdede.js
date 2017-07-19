@@ -8,6 +8,16 @@ function edit(){
 			}
 		}
 	}
+	var ul_title=document.getElementsByClassName("navbar-nav")[0];
+	if (existeix(ul_title)){
+		var li_title=ul_title.getElementsByTagName("li")[3];
+		if (existeix(li_title)){
+			var a_title=li_title.getElementsByTagName("a")[0];
+			if (existeix(a_title)){
+				a_title.href="/pelis/pending";
+			}
+		}
+	}
 }
 function existeix(nom){
 	return (nom!==undefined && nom!==null);
