@@ -29,7 +29,7 @@ function edit(){
 			var dates_size=dates.length;
 			var dates_i=0;
 			var trobats=0;
-			while (dates_i<dates_size && trobats<2){
+			while (dates_i<dates_size && trobats<6){
 				var dates_tr=dates[dates_i];
 				var dates_a=dates_tr.getElementsByTagName("a")[0];
 				if (existeix(dates_a)){
