@@ -18,6 +18,46 @@ function edit(){
 			}
 		}
 	}
+	buttonDown();
+}
+function buttonDown(){
+	if (!existeix(document.getElementById("down"))){
+        var go_down=document.createElement("a");
+        go_down.id="down";
+        go_down.style.right="5px";
+        go_down.style.top="5px";
+        go_down.style.width="30px";
+        go_down.style.height="30px";
+        go_down.style.cursor="pointer";
+        go_down.style.transform="rotate(180deg)";
+        go_down.style.border="1px solid #ddd";
+        go_down.style.borderRadius="2px";
+        go_down.style.position="fixed";
+        go_down.style.background="#fff url('https://raw.githubusercontent.com/deli0s/js/master/arrow.png') -1px -1px";
+        go_down.style.zIndex="999";
+        go_down.onclick=function(){
+			var x_0=document.getElementsByClassName("fa fa-eye-slash seen");
+			var trobat=false;
+			var size_0=x_0.length-1;
+			while(size_0>0 && !trobat){
+				trobat=(x_0[size_0].currentStyle ? x_0[size_0].currentStyle.display : getComputedStyle(x_0[size_0], null).display)==="inline-block";
+				size_0--;
+			}
+			var offst=0;
+			var elem=x_0[size_0];
+			while(elem!==null && elem!==undefined && !isNaN( elem.offsetTop ) ){
+			  offst +=elem.offsetTop;
+			  elem=elem.offsetParent;
+			}
+			if (offst<=0) offst=947;
+			$("html,body").animate({scrollTop: offst},
+				"slow");
+		};
+		var topbar=document.getElementById("topbar");
+		if (existeix(topbar)){
+			topbar.appendChild(go_down);
+		}
+    }
 }
 function existeix(nom){
 	return (nom!==undefined && nom!==null);
@@ -52,6 +92,7 @@ function getCookie(cname){
 	}
 	return "";
 }
+edit();
 function reload(){
 	try {
         edit();
