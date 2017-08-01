@@ -18,6 +18,21 @@ function edit(){
 			}
 		}
 	}
+	if (window.location.href.indexOf("pelis/pending") > -1){
+		var links=document.getElementsByClassName("directLink");
+		var pelis=document.getElementsByClassName("media-container");
+		var p_size=pelis.length;
+		if (links.length<p_size){
+			for (var i=0;i<p_size;i++){
+				var peli=pelis[i];
+				var p_=peli.getElementsByClassName("media-dropdown mini dropdown model")[0];
+				if (existeix(p_)){
+					var p_link="/aportes/4/"+p_.getAttribute("data-id");
+					addDirectLink(p_link,peli);
+				}
+			}
+		}
+	}
 	var ul_title=document.getElementsByClassName("navbar-nav")[0];
 	if (existeix(ul_title)){
 		var li_title=ul_title.getElementsByTagName("li")[3];
@@ -95,25 +110,28 @@ function getLink(src_lk,full_name,s_season,s_ep){
 	});
 }
 function addDirectLink(link_,child){
-	var a_link=document.createElement("a");
-	var a_i_link=document.createElement("i");
-	a_i_link.className="fa fa-external-link";
-	a_link.appendChild(a_i_link);
-	a_link.setAttribute('href',link_);
-	a_link.setAttribute('class','directLink');
-	a_link.setAttribute('target','_blank');
-	a_link.style.borderRadius="7px";
-	a_link.style.fontSize="smaller";
-	a_link.style.border="1px solid #ccc";
-	a_link.style.color="#000";
-	a_link.style.background="#fff";
-	a_link.style.width="28px";
-	a_link.style.padding="2px 0px 0px 2px";
-	a_link.style.position="absolute";
-	a_link.style.top="-3px";
-	a_link.style.left="3px";
-	a_link.style.zIndex="1";
-	child.appendChild(a_link);
+	var done=child.getElementsByClassName("directLink");
+	if (!done){
+		var a_link=document.createElement("a");
+		var a_i_link=document.createElement("i");
+		a_i_link.className="fa fa-external-link";
+		a_link.appendChild(a_i_link);
+		a_link.setAttribute('href',link_);
+		a_link.setAttribute('class','directLink');
+		a_link.setAttribute('target','_blank');
+		a_link.style.borderRadius="7px";
+		a_link.style.fontSize="smaller";
+		a_link.style.border="1px solid #ccc";
+		a_link.style.color="#000";
+		a_link.style.background="#fff";
+		a_link.style.width="28px";
+		a_link.style.padding="2px 0px 0px 2px";
+		a_link.style.position="absolute";
+		a_link.style.top="-3px";
+		a_link.style.left="3px";
+		a_link.style.zIndex="1";
+		child.appendChild(a_link);
+	}
 }
 function addPirate(nom,child){
 	var a_Pirate=document.createElement("a");
