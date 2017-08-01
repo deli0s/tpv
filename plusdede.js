@@ -111,7 +111,7 @@ function getLink(src_lk,full_name,s_season,s_ep){
 }
 function addDirectLink(link_,child){
 	var done=child.getElementsByClassName("directLink");
-	if (!done){
+	if (!existeix(done)){
 		var a_link=document.createElement("a");
 		var a_i_link=document.createElement("i");
 		a_i_link.className="fa fa-external-link";
