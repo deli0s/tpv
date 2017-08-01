@@ -110,7 +110,7 @@ function getLink(src_lk,full_name,s_season,s_ep){
 	});
 }
 function addDirectLink(link_,child){
-	var done=child.getElementsByClassName("directLink");
+	var done=child.getElementsByClassName("directLink")[0];
 	if (!existeix(done)){
 		var a_link=document.createElement("a");
 		var a_i_link=document.createElement("i");
