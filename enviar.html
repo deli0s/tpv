@@ -1,50 +1,111 @@
 <!DOCTYPE html>
-<html lang="es-ES">
+<html lang="ES">
 
 <head>
 	<title>Enviar pedido</title>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="./styles.css">
+	<script type="text/javascript" src="./script.js"></script>
 </head>
 
 <body>
+	<div id="main">
+		<div id="buttons">
+		</div>
+		<table id="total">
+			<tr><td style="width: 10%; text-align: center;"></td><td style="width: 10%; text-align: center;">Und.</td><td style="width: 10%; text-align: center;"></td><td style="padding-left: 10px;">DESCRIPCIÓN</td><td></td></tr>
+			<tr><td style="border-width: 0px;"></td><td style="border-width: 0px;"></td><td style="border-width: 0px;"></td><td style="border-width: 0px;"><button onclick=_send(); class="enviar">Enviar</button></td></tr>
+		</table>
+	</div>
+	
 	<script>
-		(function (){
-			var textFile = null,
-			makeTextFile = function (text) {
-				var data = new Blob([text], {type: 'text/plain'});
-
-				// If we are replacing a previously generated file we need to
-				// manually revoke the object URL to avoid memory leaks.
-				if (textFile !== null) {
-					window.URL.revokeObjectURL(textFile);
-				}
-
-				textFile = window.URL.createObjectURL(data);
-
-				return textFile;
-			};
-
-
-			var create = document.getElementById('create'),
-			textbox = document.getElementById('textbox');
-
-			create.addEventListener('click', function () {
-				var link = document.getElementById('downloadlink');
-				link.href = makeTextFile(textbox.value);
-				link.style.display = 'block';
-			}, false);
-		})();
+		function _send(){
+			var all_tr=document.getElementsByTagName("tr");
+			var size_all=all_tr.length;
+			var _pedido="";
+			for (var _i=1;_i<size_all-1;_i++){//if (size_all>2){
+				var uds=all_tr[_i].getElementsByTagName("td")[1].innerHTML;
+				var des=all_tr[_i].getElementsByTagName("td")[3].innerHTML;
+				_pedido=uds+" "+des+";";
+			}
+			setCookie("pedido",_pedido,1);
+		}
+		var list="AGUA;CAÑA;PANACHÉ;COCA-COLA;COLA ZERO;FANTA;F. LIMÓN;NESTEA;SPRITE;TONICA;SCH. LIMÓN;SCH. NARANJA;GINGER;REDBULL;MOJITO;ESTRELLA";
+		var items_list=list.split(';');
+		var n_items=items_list.length;
+		var i_items=0;
+		while (document.getElementsByClassName("item").length<n_items && i_items<n_items){
+			addItem(items_list[i_items]);
+			i_items++;
+		}
+		function addItem(nom){
+			var place=document.getElementById("buttons");
+			if (existeix(place)){
+				var a_Item=document.createElement("button");
+				a_Item.setAttribute('class','button item');
+				a_Item.innerHTML=nom;
+				a_Item.setAttribute('id',nom);
+				a_Item.onclick=function(){
+					var _item=document.getElementById("tr_"+nom);
+					if (!existeix(_item)){
+						addTr(nom);
+					}
+				};
+				place.insertBefore(a_Item,place.lastChild);
+			}
+		}
+		function addTr(nom){
+			var list=document.getElementById("total");
+			if (existeix(list)){
+				var a_Tr=document.createElement("tr");
+				a_Tr.setAttribute('id',"tr_"+nom);
+				var a_Td0_0=document.createElement("td");
+				a_Td0_0.style.textAlign="center";
+				a_Td0_0.innerHTML='<i class="icon material-icons">remove_circle_outline</i>';
+				a_Td0_0.onclick=function(){
+					var _num=document.getElementById("num_"+nom);
+					if (existeix(_num)){
+						var old_v=Number(_num.innerHTML);
+						if (old_v>1){
+							_num.innerHTML=old_v-1;
+						}
+					}
+				};
+				a_Tr.appendChild(a_Td0_0);
+				var a_Td0_1=document.createElement("td");
+				a_Td0_1.style.textAlign="center";
+				a_Td0_1.setAttribute('id',"num_"+nom);
+				a_Td0_1.innerHTML=1;
+				a_Tr.appendChild(a_Td0_1);
+				var a_Td0_2=document.createElement("td");
+				a_Td0_2.style.textAlign="center";
+				a_Td0_2.innerHTML='<i class="icon material-icons">add_circle_outline</i>';
+				a_Td0_2.onclick=function(){
+					var _num=document.getElementById("num_"+nom);
+					if (existeix(_num)){
+						var old_v=Number(_num.innerHTML);
+						_num.innerHTML=old_v+1;
+					}
+				};
+				a_Tr.appendChild(a_Td0_2);
+				var a_Td1=document.createElement("td");
+				a_Td1.innerHTML=nom;
+				a_Td1.style.paddingLeft="10px";
+				a_Tr.appendChild(a_Td1);
+				var a_Td2=document.createElement("td");
+				a_Td2.style.textAlign="center";
+				a_Td2.innerHTML='<i class="icon material-icons">delete</i>';
+				a_Td2.onclick=function(){ deleteById("tr_"+nom)};
+				a_Tr.appendChild(a_Td2);
+				var _tbody=document.getElementsByTagName("tbody")[0];
+				var _tr=_tbody.getElementsByTagName("tr");
+				var _tr_size=_tr.length;
+				_tbody.insertBefore(a_Tr,_tr[_tr_size-1]);
+				//list.insertBefore(a_Tr,list.lastChild);
+			}
+		}
 	</script>
-	<button class="button">Mojito</button>
-	<button id="mas" class="button">-</button>
-	<button id="num" class="button">0</button>
-	<button id="menos" class="button">+</button>
-	
-	<button class="button enviar">Enviar</button>
-	
-	<textarea id="textbox">Type something here</textarea>
-	<button id="create">Create file</button> 
-	<a download="./info.txt" id="downloadlink" style="display: none">Download</a>
 </body>
 
 </html>
