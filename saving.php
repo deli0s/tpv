@@ -1,4 +1,4 @@
-<php
+<?php
 	if(!empty($_POST['data'])){
 		$data = $_POST['data'];
 		$fname = mktime() . ".txt";//generates random name
