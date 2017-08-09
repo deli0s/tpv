@@ -8,6 +8,7 @@
 </head>
 
 <body>
+	<div id="main"></div>
 	<script>
 		function addItem(nom,href){
 			var a_Item=document.createElement("button");
@@ -17,7 +18,7 @@
 			a_Item.onclick=function(){
 				window.location.href=href;
 			};
-			document.body.appendChild(a_Item);
+			document.getElementById("main").appendChild(a_Item);
 		}
 		addItem("Enviar pedido","./enviar.html");
 		addItem("Recibir pedido","./recibir.html");

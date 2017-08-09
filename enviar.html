@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="./styles.css">
 	<script type="text/javascript" src="./script.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -24,13 +25,15 @@
 			var all_tr=document.getElementsByTagName("tr");
 			var size_all=all_tr.length;
 			var _pedido="";
-			for (var _i=1;_i<size_all-1;_i++){//if (size_all>2){
-				var uds=all_tr[_i].getElementsByTagName("td")[1].innerHTML;
-				var des=all_tr[_i].getElementsByTagName("td")[3].innerHTML;
-				_pedido+=uds+" "+des+"/";
+			if (size_all>2){
+				for (var _i=1;_i<size_all-1;_i++){
+					var uds=all_tr[_i].getElementsByTagName("td")[1].innerHTML;
+					var des=all_tr[_i].getElementsByTagName("td")[3].innerHTML;
+					_pedido+=uds+" "+des+"/";
+				}
+				setCookie("pedido",_pedido,1);
+				console.log(_pedido);
 			}
-			setCookie("pedido",_pedido,1);
-			console.log(_pedido);
 		}
 		var list="AGUA;CAÑA;PANACHÉ;COCA-COLA;COLA ZERO;FANTA;F. LIMÓN;NESTEA;SPRITE;TONICA;SCH. LIMÓN;SCH. NARANJA;GINGER;REDBULL;MOJITO;ESTRELLA";
 		var items_list=list.split(';');
@@ -106,6 +109,20 @@
 				//list.insertBefore(a_Tr,list.lastChild);
 			}
 		}
+	</script>
+	<script>
+		$(document).ready(function(){
+		$("button").click(function(){
+			$.post("./recibir.html",
+			{
+			  name: "Donald Duck",
+			  city: "Duckburg"
+			},
+			function(data,status){
+				alert("Data: " + data + "\nStatus: " + status);
+			});
+		});
+	});
 	</script>
 </body>
 
