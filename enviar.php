@@ -11,36 +11,51 @@
 
 <body>
 	<div id="main">
-		<div id="buttons">
-		</div>
-		<table id="total">
-			<tr><td style="width: 10%; text-align: center;"></td><td style="width: 10%; text-align: center;">Und.</td><td style="width: 10%; text-align: center;"></td><td style="padding-left: 10px;">DESCRIPCIÓN</td><td></td></tr>
-			<tr><td style="border-width: 0px;"></td><td style="border-width: 0px;"></td><td style="border-width: 0px;"></td>
-			<td style="border-width: 0px;">
-			<form id="form_pedido" action="" method="post">
-				<input type="submit" class="enviar" name="Enviar" value="Enviar"/>
-			</form></td></tr>
-		</table>
-	</div>
-	<?php
-		if(isset($_POST['Enviar'])){ //check if form was submitted
-			if(count($_POST)>1){
-				$conn = new mysqli("mysql.webcindario.com", "test_game", "test_game0");// Create connection
-				if ($conn->connect_error){
-					die("No pudo conectarse: " . $conn->connect_error);
-				}
-				foreach ($_POST as $key => $value){
-					if ($value!="Enviar"){
-						$sql = "INSERT INTO test_game.Pedidos (`pedido`) VALUES ('$value')";
-						if ($conn->query($sql) !== TRUE){
-							echo "Error: " . $sql . "<br>" . $conn->error;
-						}
-					}
-				}
-				$conn->close();
+		<?php
+			$conn = new mysqli("mysql.webcindario.com", "test_game", "test_game0");// Create connection
+			if ($conn->connect_error){
+				die("No pudo conectarse: " . $conn->connect_error);
 			}
-		}
-	?>
+			$sql = "SELECT * FROM test_game.Pedidos";
+			$result = $conn->query($sql);
+			if ($result){
+				$wait=TRUE;
+				if ($result->num_rows == 0){
+					if(isset($_POST['Enviar'])){ //check if form was submitted
+						if(count($_POST)>1){
+							foreach ($_POST as $key => $value){
+								if ($value!="Enviar"){
+									$sql = "INSERT INTO test_game.Pedidos (`pedido`) VALUES ('$value')";
+									if ($conn->query($sql) !== TRUE){
+										echo "Error: " . $sql . "<br>" . $conn->error;
+									}
+								}
+							}
+						}else $wait=FALSE;
+					}else $wait=FALSE;
+				}
+				if ($wait){
+					echo "Esperando confirmación...";
+					header("Refresh:3");
+				}else{
+					echo '
+					<div id="buttons">
+					</div>
+					<table id="total">
+						<tr><td style="width: 10%; text-align: center;"></td><td style="width: 10%; text-align: center;">Und.</td><td style="width: 10%; text-align: center;"></td><td style="padding-left: 10px;">DESCRIPCIÓN</td><td></td></tr>
+						<tr><td style="border-width: 0px;"></td><td style="border-width: 0px;"></td><td style="border-width: 0px;"></td>
+						<td style="border-width: 0px;">
+						<form id="form_pedido" action="" method="post">
+							<input type="submit" class="enviar" name="Enviar" value="Enviar"/>
+						</form></td></tr>
+					</table>';
+				}
+			}else{
+				echo "Error: " . $conn->error;
+			}
+			$conn->close();
+		?>
+	</div>
 	<script>
 		var list="AGUA;CAÑA;PANACHÉ;COCA-COLA;COLA ZERO;FANTA;F. LIMÓN;NESTEA;SPRITE;TONICA;SCH. LIMÓN;SCH. NARANJA;GINGER;REDBULL;MOJITO;ESTRELLA";
 		var items_list=list.split(';');

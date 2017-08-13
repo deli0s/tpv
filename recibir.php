@@ -10,33 +10,49 @@
 
 <body>
 	<div id="main">
-		<i style="display: none;" id="notification" class="icon material-icons">notifications_active</i>
-		<audio id="audio" >
-			<source src="alert.wav" type="audio/wav">
-		</audio>
-		<table id="total">
-			<tr><td style="width: 10%; text-align: center;"></td><td style="width: 10%; text-align: center;">Und.</td><td style="width: 10%; text-align: center;"></td><td style="padding-left: 10px;">DESCRIPCIÓN</td><td></td></tr>
-		</table>
+		<?php
+			$conn = new mysqli("mysql.webcindario.com", "test_game", "test_game0");// Create connection
+			if ($conn->connect_error){
+				die("No pudo conectarse: " . $conn->connect_error);
+			}
+			if(isset($_POST['ok'])){ //check if form was submitted
+				$sql_ok = "TRUNCATE test_game.Pedidos";
+				$result_ok = $conn->query($sql_ok);
+				if (!$result_ok){
+					echo "Error: " . $conn->error;
+				}
+			}
+			$sql = "SELECT * FROM test_game.Pedidos";
+			$result = $conn->query($sql);
+			if ($result){
+				echo '<table id="total" style="margin: auto;"><tbody>
+					<tr><td style="width: 10%; text-align: center;"></td><td style="width: 10%; text-align: center;">Und.</td><td style="width: 10%; text-align: center;"></td><td style="padding-left: 10px;">DESCRIPCIÓN</td><td></td></tr>';
+				if ($result->num_rows > 0){
+					while($row = $result->fetch_assoc()){// output data of each row
+						$uds=(string)intval($row["pedido"]);
+						if ($uds!="0") echo '<tr><td></td><td style="width: 10%; text-align: center;">'.$uds.'</td><td></td><td style="padding-left: 10px;">'.str_replace($uds,"",$row["pedido"]).'</td><td></td></tr>';
+					}
+					echo '
+						<i id="notification" class="icon material-icons">notifications_active</i>
+						<audio id="audio" autoplay>
+							<source src="alert.wav" type="audio/wav">
+						</audio>';
+				}else{
+					header("Refresh:3");
+				}
+				echo '<tr><td></td><td></td><td></td><td>
+						<form id="ok_pedido" action="" method="post">
+							<input type="submit" class="enviar" name="ok" value="Confirmar"/>
+						</form>
+					</td><td></td></tr>
+				</tbody></table>';
+			}else{
+				echo "Error: " . $conn->error;
+			}
+			$result->free();
+			$conn->close();
+		?>
 	</div>
-	<?php
-		$conn = new mysqli("mysql.webcindario.com", "test_game", "test_game0");// Create connection
-		if ($conn->connect_error){
-			die("No pudo conectarse: " . $conn->connect_error);
-		}
-		$sql = "SELECT * FROM test_game.Pedidos";
-		$result = $conn->query($sql);
-		if ($result !== TRUE){
-			echo "Error: " . $sql . "<br>" . $conn->error;
-		}if ($result->num_rows > 0) {
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-        echo "desc: " . $row["pedido"] "<br>";
-    }
-} else {
-    echo "0 results";
-}
-		$conn->close();
-	?>
 	<script>
 		/*var audio=document.getElementById("audio");
 		var notification=document.getElementById("notification");
