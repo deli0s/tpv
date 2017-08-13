@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ES">
+
+<head>
+	<title>Elegir Enviar-Recibir</title>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+	<div id="main"></div>
+	<script>
+		function addItem(nom,href){
+			var a_Item=document.createElement("button");
+			a_Item.setAttribute('class','button item');
+			a_Item.innerHTML=nom;
+			a_Item.setAttribute('id',nom);
+			a_Item.onclick=function(){
+				window.location.href=href;
+			};
+			document.getElementById("main").appendChild(a_Item);
+		}
+		addItem("Enviar pedido","./enviar.php");
+		addItem("Recibir pedido","./recibir.php");
+	</script>
+</body>
+
+</html>
